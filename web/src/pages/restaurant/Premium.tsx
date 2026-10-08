@@ -41,7 +41,7 @@ function Bars({ rows, label }: { rows: { key: string; label: string; value: numb
             <span className="h-3 overflow-hidden rounded-full bg-ink/10">
               <span className="block h-full rounded-full bg-gradient-to-r from-gold-dark to-gold" style={{ width: `${(r.value / max) * 100}%` }} />
             </span>
-            <span className="text-right font-semibold text-navy tabular-nums">{fmtNumber(r.value, intl)}</span>
+            <span className="text-right font-semibold text-verd tabular-nums">{fmtNumber(r.value, intl)}</span>
           </li>
         ))}
       </ul>
@@ -67,15 +67,15 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
   await document.fonts?.ready;
 
   const bg = ctx.createRadialGradient(W / 2, 0, 50, W / 2, H / 2, W);
-  bg.addColorStop(0, '#16345F');
-  bg.addColorStop(1, '#0B1F3A');
+  bg.addColorStop(0, '#22573F');
+  bg.addColorStop(1, '#0F2A1F');
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
   const gold = ctx.createLinearGradient(0, 0, W, H);
-  gold.addColorStop(0, '#EBD27A');
-  gold.addColorStop(0.5, '#C9A227');
-  gold.addColorStop(1, '#8F7114');
+  gold.addColorStop(0, '#F0D998');
+  gold.addColorStop(0.5, '#CFA64A');
+  gold.addColorStop(1, '#8A6A1E');
   ctx.strokeStyle = gold;
   ctx.lineWidth = 10;
   ctx.strokeRect(36, 36, W - 72, H - 72);
@@ -94,7 +94,7 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
   ctx.font = '700 64px "Playfair Display", Georgia, serif';
   ctx.fillText(labels.heading, W / 2, 330);
 
-  ctx.fillStyle = '#F8F5EC';
+  ctx.fillStyle = '#F8F4E8';
   ctx.font = '400 28px "Inter Variable", system-ui, sans-serif';
   ctx.fillText(labels.presented, W / 2, 390);
 
@@ -102,7 +102,7 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
   ctx.font = '700 58px "Playfair Display", Georgia, serif';
   ctx.fillText(d.restaurantName, W / 2, 465, W - 240);
 
-  ctx.fillStyle = '#F8F5EC';
+  ctx.fillStyle = '#F8F4E8';
   ctx.font = '400 26px "Inter Variable", system-ui, sans-serif';
   const monthLabel = new Date(`${d.month}-01T00:00:00`).toLocaleDateString(intl, { month: 'long', year: 'numeric' });
   ctx.fillText(`${labels.body} · ${titleCase(d.city)} · ${monthLabel}`, W / 2, 520, W - 240);
@@ -116,14 +116,14 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
   const colW = (W - 240) / stats.length;
   stats.forEach(([value, label], i) => {
     const x = 120 + colW * i + colW / 2;
-    ctx.fillStyle = '#B3121F';
+    ctx.fillStyle = '#7A1F3D';
     ctx.beginPath();
     ctx.roundRect(x - colW / 2 + 16, 580, colW - 32, 190, 22);
     ctx.fill();
     ctx.strokeStyle = gold;
     ctx.lineWidth = 2;
     ctx.stroke();
-    ctx.fillStyle = '#F8F5EC';
+    ctx.fillStyle = '#F8F4E8';
     ctx.font = '700 64px "Playfair Display", Georgia, serif';
     ctx.fillText(value, x, 680, colW - 50);
     ctx.font = '500 24px "Inter Variable", system-ui, sans-serif';
@@ -133,7 +133,7 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
   ctx.fillStyle = gold;
   ctx.font = '600 30px "Playfair Display", Georgia, serif';
   ctx.fillText(`♛ ${labels.partner}`, W / 2, 850);
-  ctx.fillStyle = 'rgba(248,245,236,0.7)';
+  ctx.fillStyle = 'rgba(248,244,232,0.7)';
   ctx.font = '400 20px "Inter Variable", system-ui, sans-serif';
   ctx.fillText(labels.footer, W / 2, 900, W - 240);
 }
@@ -177,7 +177,7 @@ function Certificate() {
   return (
     <Card>
       <div className="flex flex-wrap items-end justify-between gap-4">
-        <h2 className="font-serif text-2xl font-bold text-navy">{t('premium.certificate')}</h2>
+        <h2 className="font-serif text-2xl font-bold text-verd">{t('premium.certificate')}</h2>
         <Field label={t('premium.month')}>{(id) => <input id={id} type="month" className="input" value={month} max={new Date().toISOString().slice(0, 7)} onChange={(e) => setMonth(e.target.value)} />}</Field>
       </div>
       <div className="mt-4">
@@ -215,21 +215,21 @@ function AnalyticsPanel() {
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
         <Card>
-          <h3 className="mb-3 font-serif text-lg font-bold text-navy">{t('premium.monthly')}</h3>
+          <h3 className="mb-3 font-serif text-lg font-bold text-verd">{t('premium.monthly')}</h3>
           {data.monthly.length ? <Bars label={t('premium.monthly')} rows={data.monthly.map((m) => ({ key: m.month, label: m.month, value: m.meals }))} /> : <p className="text-sm text-ink/60">{t('premium.noData')}</p>}
         </Card>
         <Card>
-          <h3 className="mb-3 font-serif text-lg font-bold text-navy">{t('premium.topNgos')}</h3>
+          <h3 className="mb-3 font-serif text-lg font-bold text-verd">{t('premium.topNgos')}</h3>
           {data.topNgos.length ? <Bars label={t('premium.topNgos')} rows={data.topNgos.map((n) => ({ key: n.name, label: n.name, value: n.meals }))} /> : <p className="text-sm text-ink/60">{t('premium.noData')}</p>}
         </Card>
         <Card>
-          <h3 className="mb-3 font-serif text-lg font-bold text-navy">{t('premium.foodSplit')}</h3>
+          <h3 className="mb-3 font-serif text-lg font-bold text-verd">{t('premium.foodSplit')}</h3>
           {data.foodTypes.length ? (
             <Bars label={t('premium.foodSplit')} rows={data.foodTypes.map((f) => ({ key: f.type, label: t(`food.${f.type}` as MessageKey), value: f.meals }))} />
           ) : (
             <p className="text-sm text-ink/60">{t('premium.noData')}</p>
           )}
-          <h3 className="mt-5 mb-3 font-serif text-lg font-bold text-navy">{t('admin.listingStatus')}</h3>
+          <h3 className="mt-5 mb-3 font-serif text-lg font-bold text-verd">{t('admin.listingStatus')}</h3>
           <Bars label={t('admin.listingStatus')} rows={Object.entries(data.outcomes).map(([k, v]) => ({ key: k, label: t(`listing.${k}` as MessageKey), value: v }))} />
         </Card>
       </div>
@@ -258,7 +258,7 @@ function RequestForm() {
   }
   return (
     <Card>
-      <h2 className="font-serif text-2xl font-bold text-navy">{t('premium.requestTitle')}</h2>
+      <h2 className="font-serif text-2xl font-bold text-verd">{t('premium.requestTitle')}</h2>
       <p className="mt-1 text-sm text-ink/70">{t('premium.requestBody')}</p>
       {sent ? (
         <Alert tone="success" className="mt-4">

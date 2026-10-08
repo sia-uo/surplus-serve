@@ -20,7 +20,7 @@ export default function RestaurantProfilePage() {
           <Badge tone={restaurant.verification === 'approved' ? 'green' : restaurant.verification === 'rejected' ? 'red' : 'gold'}>
             {t(`verification.${restaurant.verification}` as MessageKey)}
           </Badge>
-          <Badge tone="navy">
+          <Badge tone="verd">
             ★ {t('profile.scoreQuality')}: {restaurant.qualityScore}
           </Badge>
           {restaurant.premium && <PartnerBadge />}

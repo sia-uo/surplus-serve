@@ -38,7 +38,7 @@ function ClaimCard({ claim, onChange }: { claim: Claim; onChange: () => void }) 
     <article className="card animate-rise p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="font-serif text-xl font-bold text-navy">{claim.listingTitle}</h3>
+          <h3 className="font-serif text-xl font-bold text-verd">{claim.listingTitle}</h3>
           {r && <p className="text-sm text-ink/70">{r.name}</p>}
         </div>
         <div className="flex gap-1.5">
@@ -54,11 +54,11 @@ function ClaimCard({ claim, onChange }: { claim: Claim; onChange: () => void }) 
 
       {claim.status === 'pending' && (
         <>
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border-2 border-dashed border-crimson/50 bg-white px-4 py-3">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border-2 border-dashed border-vine/50 bg-white px-4 py-3">
             <span className="text-xs font-semibold tracking-widest text-ink/60 uppercase">{t('claims.otp')}</span>
-            <span className="font-mono text-3xl font-bold tracking-[0.25em] text-crimson">{claim.otp}</span>
+            <span className="font-mono text-3xl font-bold tracking-[0.25em] text-vine">{claim.otp}</span>
           </div>
-          <p className={`mt-2 text-sm font-medium ${claim.pickupBy - Date.now() < 3600_000 ? 'text-crimson' : 'text-ink/80'}`}>⏰ {t('claims.collectBy', { time: fmtDateTime(claim.pickupBy, intl) })}</p>
+          <p className={`mt-2 text-sm font-medium ${claim.pickupBy - Date.now() < 3600_000 ? 'text-vine' : 'text-ink/80'}`}>⏰ {t('claims.collectBy', { time: fmtDateTime(claim.pickupBy, intl) })}</p>
           {r && (
             <div className="mt-3 text-sm text-ink/80">
               <p>{r.address}</p>
@@ -70,7 +70,7 @@ function ClaimCard({ claim, onChange }: { claim: Claim; onChange: () => void }) 
                 <a className="btn btn-outline min-h-10 py-2" href={`tel:${r.phone}`}>
                   ☎ {t('claimModal.call')}
                 </a>
-                <Button variant="ghost" className="min-h-10 py-2 text-crimson" loading={busy} onClick={cancel}>
+                <Button variant="ghost" className="min-h-10 py-2 text-vine" loading={busy} onClick={cancel}>
                   {t('claims.cancel')}
                 </Button>
               </div>
@@ -98,7 +98,7 @@ function ClaimCard({ claim, onChange }: { claim: Claim; onChange: () => void }) 
         </div>
       )}
 
-      {claim.status === 'no_show' && <p className="mt-3 text-sm text-crimson">{t('claims.noShowNote')}</p>}
+      {claim.status === 'no_show' && <p className="mt-3 text-sm text-vine">{t('claims.noShowNote')}</p>}
       {claim.status === 'cancelled' && claim.cancelReason && <p className="mt-3 text-sm text-ink/60">{claim.cancelReason}</p>}
       {error && (
         <Alert tone="error" className="mt-3">

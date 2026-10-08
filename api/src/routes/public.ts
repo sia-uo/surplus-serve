@@ -8,7 +8,7 @@ import { toSponsor } from '../lib/mappers';
 import { rateLimit } from '../lib/ratelimit';
 import { sponsorContactSchema } from '../lib/schemas';
 import { requireAuth } from '../lib/session';
-import { appUrl, fail, newId, normaliseCity, now, parse, readJson, titleCase } from '../lib/util';
+import { appUrl, fail, isLocalDev, newId, normaliseCity, now, parse, readJson, titleCase } from '../lib/util';
 
 export const pub = new Hono<AppEnv>();
 
@@ -79,7 +79,7 @@ pub.get('/config', (c) => {
   const cfg: AppConfig = {
     packagingCap: Number(c.env.PACKAGING_CAP ?? 15) || 15,
     googleEnabled: !!c.env.GOOGLE_CLIENT_ID,
-    devLogin: c.env.DEV_LOGIN === 'true' && ['localhost', '127.0.0.1'].includes(new URL(c.req.url).hostname),
+    devLogin: c.env.DEV_LOGIN === 'true' && isLocalDev(c.req.raw),
   };
   return c.json(cfg);
 });

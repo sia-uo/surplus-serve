@@ -131,7 +131,7 @@ export function AddressPicker({ value, onChange }: { value: AddressValue; onChan
           📌 {value.lat.toFixed(5)}, {value.lng.toFixed(5)}
         </p>
       ) : (
-        <p className="text-xs font-medium text-crimson">{t('profile.noLocation')}</p>
+        <p className="text-xs font-medium text-vine">{t('profile.noLocation')}</p>
       )}
     </div>
   );

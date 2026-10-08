@@ -43,7 +43,7 @@ export default function Login() {
     <Container className="max-w-md">
       <div className="card animate-rise p-8 text-center">
         <Crest className="mx-auto size-20" />
-        <h1 className="mt-4 text-3xl font-bold text-navy">{t('login.title')}</h1>
+        <h1 className="mt-4 text-3xl font-bold text-verd">{t('login.title')}</h1>
         <p className="mt-2 text-ink/70">{t('login.subtitle')}</p>
         {params.get('error') && (
           <Alert tone="error" className="mt-5">

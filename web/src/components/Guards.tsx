@@ -24,7 +24,7 @@ export function RequireRole({ roles, children }: { roles: Role[]; children: Reac
     return (
       <Container className="max-w-xl">
         <Card>
-          <h1 className="font-serif text-2xl font-bold text-crimson">{t('status.suspendedTitle')}</h1>
+          <h1 className="font-serif text-2xl font-bold text-vine">{t('status.suspendedTitle')}</h1>
           <p className="mt-2 text-ink/80">{t('status.suspendedBody')}</p>
           {user.suspendedReason && (
             <Alert tone="error" className="mt-4">

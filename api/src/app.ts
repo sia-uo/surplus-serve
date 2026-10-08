@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 import { secureHeaders } from 'hono/secure-headers';
 import type { AppEnv } from './env';
+import { isLocalDev, requestOrigin } from './lib/util';
 import { admin } from './routes/admin';
 import { auth } from './routes/auth';
 import { files } from './routes/files';
@@ -20,7 +21,12 @@ export function createApp() {
   app.use('/api/*', async (c, next) => {
     if (!['GET', 'HEAD', 'OPTIONS'].includes(c.req.method)) {
       const origin = c.req.header('origin');
-      if (origin && origin !== new URL(c.req.url).origin) {
+      const allowed =
+        !origin ||
+        origin === new URL(c.req.url).origin ||
+        origin === requestOrigin(c.env, c.req.raw) ||
+        (isLocalDev(c.req.raw) && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin));
+      if (!allowed) {
         throw new HTTPException(403, { message: 'Cross-origin request blocked' });
       }
     }

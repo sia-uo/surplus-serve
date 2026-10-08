@@ -13,7 +13,7 @@ export function FoodTypePicker({ value, onChange }: { value: FoodType; onChange:
           role="radio"
           aria-checked={value === f}
           onClick={() => onChange(f)}
-          className={cx('chip', value === f ? 'border-navy bg-navy text-gold' : 'border-ink/20 bg-white text-ink hover:border-gold-dark')}
+          className={cx('chip', value === f ? 'border-verd bg-verd text-gold' : 'border-ink/20 bg-white text-ink hover:border-gold-dark')}
         >
           {f === 'veg' ? '🟢' : f === 'nonveg' ? '🔺' : '✳️'} {t(`food.${f}` as MessageKey)}
         </button>
@@ -34,7 +34,7 @@ export function AllergenPicker({ value, onChange }: { value: Allergen[]; onChang
             key={a}
             aria-pressed={on}
             onClick={() => onChange(on ? value.filter((x) => x !== a) : [...value, a])}
-            className={cx('chip text-sm', on ? 'border-crimson bg-crimson text-white' : 'border-ink/20 bg-white text-ink hover:border-crimson/60')}
+            className={cx('chip text-sm', on ? 'border-vine bg-vine text-white' : 'border-ink/20 bg-white text-ink hover:border-vine/60')}
           >
             {on ? '⚠ ' : ''}
             {t(`allergen.${a}` as MessageKey)}
@@ -53,8 +53,8 @@ export function SafetyChecklist({ value, onChange }: { value: ChecklistState; on
   const { t } = useI18n();
   const done = SAFETY_CHECKLIST.filter((k) => value[k]).length;
   return (
-    <fieldset className={cx('rounded-2xl border-2 p-4', checklistComplete(value) ? 'border-emerald-700/40 bg-emerald-50/60' : 'border-crimson/40 bg-crimson/5')}>
-      <legend className="px-2 font-serif text-lg font-bold text-navy">
+    <fieldset className={cx('rounded-2xl border-2 p-4', checklistComplete(value) ? 'border-verd-600/40 bg-leaf/15' : 'border-vine/40 bg-vine/5')}>
+      <legend className="px-2 font-serif text-lg font-bold text-verd">
         🛡️ {t('checklist.title')}{' '}
         <span className="font-sans text-sm font-medium text-ink/60">
           ({done}/{SAFETY_CHECKLIST.length})

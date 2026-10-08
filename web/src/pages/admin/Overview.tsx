@@ -26,12 +26,12 @@ export default function AdminOverview() {
       <AdminTitle>{t('admin.overview')}</AdminTitle>
       <div className="grid gap-4 sm:grid-cols-2">
         <Link to="/admin/verifications?type=restaurant" className="card flex items-center justify-between p-5 transition hover:shadow-xl">
-          <span className="font-semibold text-navy">{t('admin.pendingRestaurants')}</span>
-          <span className={`font-serif text-3xl font-bold ${data.pending.restaurants ? 'text-crimson' : 'text-ink/40'}`}>{data.pending.restaurants}</span>
+          <span className="font-semibold text-verd">{t('admin.pendingRestaurants')}</span>
+          <span className={`font-serif text-3xl font-bold ${data.pending.restaurants ? 'text-vine' : 'text-ink/40'}`}>{data.pending.restaurants}</span>
         </Link>
         <Link to="/admin/verifications?type=ngo" className="card flex items-center justify-between p-5 transition hover:shadow-xl">
-          <span className="font-semibold text-navy">{t('admin.pendingNgos')}</span>
-          <span className={`font-serif text-3xl font-bold ${data.pending.ngos ? 'text-crimson' : 'text-ink/40'}`}>{data.pending.ngos}</span>
+          <span className="font-semibold text-verd">{t('admin.pendingNgos')}</span>
+          <span className={`font-serif text-3xl font-bold ${data.pending.ngos ? 'text-vine' : 'text-ink/40'}`}>{data.pending.ngos}</span>
         </Link>
       </div>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-6">
@@ -44,30 +44,30 @@ export default function AdminOverview() {
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
-          <h2 className="mb-3 font-serif text-xl font-bold text-navy">{t('admin.listingStatus')}</h2>
+          <h2 className="mb-3 font-serif text-xl font-bold text-verd">{t('admin.listingStatus')}</h2>
           <ul className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-3">
             {['active', 'claimed', 'completed', 'expired', 'cancelled'].map((s) => (
               <li key={s} className="rounded-xl bg-ivory-200 px-3 py-2">
                 <span className="block text-ink/60">{t(`listing.${s}` as MessageKey)}</span>
-                <span className="font-serif text-xl font-bold text-navy">{n(data.listings[s] ?? 0)}</span>
+                <span className="font-serif text-xl font-bold text-verd">{n(data.listings[s] ?? 0)}</span>
               </li>
             ))}
           </ul>
         </Card>
         <Card>
-          <h2 className="mb-3 font-serif text-xl font-bold text-navy">{t('admin.usersByRole')}</h2>
+          <h2 className="mb-3 font-serif text-xl font-bold text-verd">{t('admin.usersByRole')}</h2>
           <ul className="grid grid-cols-2 gap-2 text-sm">
             {Object.entries(data.users).map(([role, count]) => (
               <li key={role} className="rounded-xl bg-ivory-200 px-3 py-2">
                 <span className="block text-ink/60 capitalize">{role}</span>
-                <span className="font-serif text-xl font-bold text-navy">{n(count)}</span>
+                <span className="font-serif text-xl font-bold text-verd">{n(count)}</span>
               </li>
             ))}
           </ul>
         </Card>
       </div>
       <Card className="overflow-x-auto">
-        <h2 className="mb-3 font-serif text-xl font-bold text-navy">{t('admin.perCity')}</h2>
+        <h2 className="mb-3 font-serif text-xl font-bold text-verd">{t('admin.perCity')}</h2>
         {data.cities.length === 0 ? (
           <p className="text-sm text-ink/60">{t('admin.noAudit')}</p>
         ) : (

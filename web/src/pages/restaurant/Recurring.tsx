@@ -164,12 +164,12 @@ export default function Recurring() {
           {data.items.map((tpl) => (
             <Card key={tpl.id} className="animate-rise">
               <div className="flex flex-wrap items-start justify-between gap-2">
-                <h3 className="font-serif text-xl font-bold text-navy">{tpl.title}</h3>
+                <h3 className="font-serif text-xl font-bold text-verd">{tpl.title}</h3>
                 <Badge tone={tpl.active ? 'green' : 'gray'}>{tpl.active ? t('recurring.active') : t('recurring.paused')}</Badge>
               </div>
               <div className="mt-2 flex flex-wrap gap-2 text-sm">
                 <FoodTypeBadge type={tpl.foodType} />
-                <Badge tone="navy">
+                <Badge tone="verd">
                   🔁 {tpl.frequency === 'daily' ? t('recurring.daily') : t(`day.${tpl.weekday ?? 0}` as MessageKey)} · {tpl.postTime} IST
                 </Badge>
                 <Badge tone="outline">
@@ -181,7 +181,7 @@ export default function Recurring() {
                 <Button variant="outline" className="min-h-9 py-1.5" onClick={() => toggle(tpl)}>
                   {tpl.active ? `⏸ ${t('recurring.pause')}` : `▶ ${t('recurring.resume')}`}
                 </Button>
-                <Button variant="ghost" className="min-h-9 py-1.5 text-crimson" onClick={() => remove(tpl)}>
+                <Button variant="ghost" className="min-h-9 py-1.5 text-vine" onClick={() => remove(tpl)}>
                   {t('common.delete')}
                 </Button>
               </div>

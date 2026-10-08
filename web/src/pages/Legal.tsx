@@ -10,7 +10,7 @@ const UPDATED = '2026-10-08';
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="mt-8">
-      <h2 className="font-serif text-xl font-bold text-navy">{title}</h2>
+      <h2 className="font-serif text-xl font-bold text-verd">{title}</h2>
       <div className="mt-2 space-y-3 leading-relaxed text-ink/85">{children}</div>
     </section>
   );

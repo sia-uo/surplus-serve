@@ -66,7 +66,7 @@ export default function AdminUsers() {
           <option value="admin">{t('nav.admin')}</option>
         </select>
         <label className="chip border-gold/40 text-ivory">
-          <input type="checkbox" className="mr-2 accent-crimson" checked={onlySuspended} onChange={(e) => setOnlySuspended(e.target.checked)} />
+          <input type="checkbox" className="mr-2 accent-vine" checked={onlySuspended} onChange={(e) => setOnlySuspended(e.target.checked)} />
           {t('status.suspendedTitle')}
         </label>
       </div>
@@ -92,14 +92,14 @@ export default function AdminUsers() {
             </thead>
             <tbody className="divide-y divide-ink/10">
               {list.items.map((u) => (
-                <tr key={u.id} className={u.status === 'suspended' ? 'bg-crimson/5' : ''}>
+                <tr key={u.id} className={u.status === 'suspended' ? 'bg-vine/5' : ''}>
                   <td className="px-4 py-3">
                     <p className="font-semibold">{u.orgName ?? u.name}</p>
                     <p className="text-xs text-ink/60">
                       {u.email}
                       {u.city && ` · ${titleCase(u.city)}`}
                     </p>
-                    {u.suspendedReason && <p className="text-xs text-crimson">{u.suspendedReason}</p>}
+                    {u.suspendedReason && <p className="text-xs text-vine">{u.suspendedReason}</p>}
                   </td>
                   <td className="px-4">
                     <span className="capitalize">{u.role ?? '—'}</span>

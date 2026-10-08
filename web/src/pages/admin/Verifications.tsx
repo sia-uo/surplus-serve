@@ -45,7 +45,7 @@ function VerificationCard({ item, type, onDone }: { item: Item; type: 'restauran
     <Card className="animate-rise">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="font-serif text-xl font-bold text-navy">{p.name}</h3>
+          <h3 className="font-serif text-xl font-bold text-verd">{p.name}</h3>
           <p className="text-sm text-ink/70">
             {item.email} · {t('admin.joined')} {fmtDate(item.createdAt, intl)}
           </p>
@@ -79,11 +79,11 @@ function VerificationCard({ item, type, onDone }: { item: Item; type: 'restauran
             <dt className="text-xs text-ink/60">{t('admin.document')}</dt>
             <dd>
               {n.certificateKey ? (
-                <a className="font-medium text-navy underline" href={`/api/files/${n.certificateKey}`} target="_blank" rel="noreferrer">
+                <a className="font-medium text-verd underline" href={`/api/files/${n.certificateKey}`} target="_blank" rel="noreferrer">
                   📄 {t('common.view')}
                 </a>
               ) : (
-                <span className="text-crimson">{t('admin.noDocument')}</span>
+                <span className="text-vine">{t('admin.noDocument')}</span>
               )}
             </dd>
           </div>

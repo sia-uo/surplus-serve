@@ -39,7 +39,7 @@ function VerifyCard({ claim, onVerified }: { claim: Claim; onVerified: () => voi
     <article className="card animate-rise p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="font-serif text-lg font-bold text-navy">{claim.listingTitle}</h3>
+          <h3 className="font-serif text-lg font-bold text-verd">{claim.listingTitle}</h3>
           <p className="text-sm text-ink/70">
             {t('restaurant.claimedBy')} <strong>{claim.ngo?.name}</strong> · ☎{' '}
             <a className="underline" href={`tel:${claim.ngo?.phone}`}>
@@ -50,7 +50,7 @@ function VerifyCard({ claim, onVerified }: { claim: Claim; onVerified: () => voi
         <FoodTypeBadge type={claim.foodType} />
       </div>
       <div className="mt-3 flex flex-wrap gap-2 text-sm">
-        <Badge tone="navy">
+        <Badge tone="verd">
           🍛 {claim.servings} {t('common.servings')}
         </Badge>
         <Badge tone={overdue ? 'red' : 'outline'}>
@@ -100,7 +100,7 @@ function HistoryRow({ claim }: { claim: Claim }) {
   return (
     <li className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <p className="font-semibold text-navy">
+        <p className="font-semibold text-verd">
           {claim.listingTitle} · {claim.servings} {t('common.servings')}
         </p>
         <p className="text-sm text-ink/70">

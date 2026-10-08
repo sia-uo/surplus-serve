@@ -59,7 +59,7 @@ export function SkeletonCards({ n = 3 }: { n?: number }) {
 export function ErrorState({ message, onRetry, dark }: { message?: string | null; onRetry?: () => void; dark?: boolean }) {
   const { t } = useI18n();
   return (
-    <div role="alert" className={cx('rounded-2xl border p-6 text-center', dark ? 'border-crimson/60 bg-crimson/10 text-ivory' : 'border-crimson/40 bg-crimson/5 text-ink')}>
+    <div role="alert" className={cx('rounded-2xl border p-6 text-center', dark ? 'border-vine/60 bg-vine/10 text-ivory' : 'border-vine/40 bg-vine/5 text-ink')}>
       <p className="font-semibold">{t('common.error')}</p>
       {message && <p className="mt-1 text-sm opacity-80">{message}</p>}
       {onRetry && (
@@ -86,10 +86,10 @@ export function EmptyState({ title, body, action, icon = '🍽️', dark }: { ti
 
 export function Alert({ tone = 'info', children, className }: { tone?: 'info' | 'success' | 'warning' | 'error'; children: ReactNode; className?: string }) {
   const tones = {
-    info: 'border-navy/20 bg-navy/5 text-ink',
-    success: 'border-emerald-700/30 bg-emerald-50 text-emerald-900',
+    info: 'border-verd/20 bg-verd/5 text-ink',
+    success: 'border-verd-600/30 bg-leaf/15 text-verd-700',
     warning: 'border-gold-dark/40 bg-gold/10 text-ink',
-    error: 'border-crimson/40 bg-crimson/5 text-crimson-700',
+    error: 'border-vine/40 bg-vine/5 text-vine-700',
   };
   return (
     <div role={tone === 'error' ? 'alert' : 'status'} className={cx('rounded-xl border px-4 py-3 text-sm', tones[tone], className)}>
@@ -109,17 +109,17 @@ export function Field({ label, hint, error, children, optional }: { label: strin
       </label>
       {children(id)}
       {hint && !error && <p className="hint">{hint}</p>}
-      {error && <p className="mt-1 text-xs font-medium text-crimson">{error}</p>}
+      {error && <p className="mt-1 text-xs font-medium text-vine">{error}</p>}
     </div>
   );
 }
 
-export function Badge({ tone = 'navy', children, className }: { tone?: 'navy' | 'gold' | 'red' | 'green' | 'gray' | 'outline'; children: ReactNode; className?: string }) {
+export function Badge({ tone = 'verd', children, className }: { tone?: 'verd' | 'gold' | 'red' | 'green' | 'gray' | 'outline'; children: ReactNode; className?: string }) {
   const tones = {
-    navy: 'bg-navy text-ivory',
-    gold: 'bg-gradient-to-r from-gold-light to-gold text-navy',
-    red: 'bg-crimson text-white',
-    green: 'bg-emerald-700 text-white',
+    verd: 'bg-verd text-ivory',
+    gold: 'bg-gradient-to-r from-gold-light to-gold text-verd',
+    red: 'bg-vine text-white',
+    green: 'bg-verd-600 text-white',
     gray: 'bg-ink/10 text-ink',
     outline: 'border border-gold-dark/50 text-gold-dark',
   };
@@ -136,6 +136,7 @@ export function PageHeader({ eyebrow, title, subtitle, actions }: { eyebrow?: st
       <div className="animate-rise">
         {eyebrow && <p className="heading-eyebrow mb-2">{eyebrow}</p>}
         <h1 className="gold-text text-3xl font-bold sm:text-4xl">{title}</h1>
+        <div className="mt-3 h-px w-24 bg-gradient-to-r from-gold via-leaf/70 to-transparent" aria-hidden />
         {subtitle && <p className="mt-2 max-w-2xl text-ivory/75">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
@@ -145,14 +146,14 @@ export function PageHeader({ eyebrow, title, subtitle, actions }: { eyebrow?: st
 
 export function StatCard({ label, value, icon, dark }: { label: string; value: ReactNode; icon?: string; dark?: boolean }) {
   return (
-    <div className={cx('relative overflow-hidden rounded-2xl border p-5', dark ? 'border-gold/40 bg-navy-800/70' : 'card')}>
+    <div className={cx('relative overflow-hidden rounded-2xl border p-5', dark ? 'border-gold/40 bg-verd-800/70' : 'card')}>
       <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent" />
       {icon && (
         <div className="mb-2 text-2xl" aria-hidden>
           {icon}
         </div>
       )}
-      <div className={cx('font-serif text-3xl font-bold', dark ? 'gold-text' : 'text-navy')}>{value}</div>
+      <div className={cx('font-serif text-3xl font-bold', dark ? 'gold-text' : 'text-verd')}>{value}</div>
       <div className={cx('mt-1 text-sm', dark ? 'text-ivory/75' : 'text-ink/70')}>{label}</div>
     </div>
   );
@@ -171,11 +172,11 @@ export function Tabs<T extends string>({ value, onChange, tabs, dark }: { value:
             onClick={() => onChange(tab.value)}
             className={cx(
               'chip shrink-0',
-              active ? 'border-gold bg-gold text-navy' : dark ? 'border-gold/40 text-ivory hover:border-gold' : 'border-ink/20 bg-white text-ink hover:border-gold-dark',
+              active ? 'border-gold bg-gold text-verd' : dark ? 'border-gold/40 text-ivory hover:border-gold' : 'border-ink/20 bg-white text-ink hover:border-gold-dark',
             )}
           >
             {tab.label}
-            {tab.count !== undefined && <span className={cx('ml-2 rounded-full px-1.5 text-xs', active ? 'bg-navy text-gold' : 'bg-gold/20')}>{tab.count}</span>}
+            {tab.count !== undefined && <span className={cx('ml-2 rounded-full px-1.5 text-xs', active ? 'bg-verd text-gold' : 'bg-gold/20')}>{tab.count}</span>}
           </button>
         );
       })}
@@ -201,7 +202,7 @@ export function Modal({ open, onClose, title, children, wide }: { open: boolean;
   }, [open, onClose]);
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-[1000] flex items-end justify-center bg-navy-950/70 p-0 backdrop-blur-sm sm:items-center sm:p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[1000] flex items-end justify-center bg-verd-950/70 p-0 backdrop-blur-sm sm:items-center sm:p-4" onClick={onClose}>
       <div
         ref={ref}
         role="dialog"
@@ -212,7 +213,7 @@ export function Modal({ open, onClose, title, children, wide }: { open: boolean;
         className={cx('card max-h-[92dvh] w-full animate-rise overflow-y-auto rounded-b-none p-6 outline-none sm:rounded-2xl', wide ? 'sm:max-w-2xl' : 'sm:max-w-lg')}
       >
         <div className="mb-4 flex items-start justify-between gap-4">
-          <h2 className="font-serif text-2xl font-bold text-navy">{title}</h2>
+          <h2 className="font-serif text-2xl font-bold text-verd">{title}</h2>
           <button onClick={onClose} className="btn-ghost btn -mt-1 -mr-2 min-h-9 px-3" aria-label={t('common.close')}>
             ✕
           </button>
@@ -270,7 +271,7 @@ export function Checkbox({ checked, onChange, children, id }: { checked: boolean
   const cid = id ?? autoId;
   return (
     <label htmlFor={cid} className="flex cursor-pointer items-start gap-3 rounded-xl p-2 text-sm text-ink hover:bg-ink/5">
-      <input id={cid} type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="mt-0.5 size-5 shrink-0 accent-crimson" />
+      <input id={cid} type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="mt-0.5 size-5 shrink-0 accent-vine" />
       <span>{children}</span>
     </label>
   );

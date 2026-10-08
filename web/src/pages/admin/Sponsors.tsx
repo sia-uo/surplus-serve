@@ -130,12 +130,12 @@ export default function AdminSponsors() {
             return (
               <Card key={s.id}>
                 <div className="flex h-16 items-center justify-center rounded-xl bg-white">
-                  {s.logoUrl ? <img src={s.logoUrl} alt={s.name} className="max-h-14 max-w-full object-contain" /> : <span className="font-serif text-xl font-bold text-navy">{s.name}</span>}
+                  {s.logoUrl ? <img src={s.logoUrl} alt={s.name} className="max-h-14 max-w-full object-contain" /> : <span className="font-serif text-xl font-bold text-verd">{s.name}</span>}
                 </div>
-                <h3 className="mt-3 font-serif text-lg font-bold text-navy">{s.name}</h3>
+                <h3 className="mt-3 font-serif text-lg font-bold text-verd">{s.name}</h3>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   <Badge tone="gold">{t(`admin.tier.${s.tier}` as MessageKey)}</Badge>
-                  <Badge tone="navy">{s.city === 'all' ? '🇮🇳 all' : titleCase(s.city)}</Badge>
+                  <Badge tone="verd">{s.city === 'all' ? '🇮🇳 all' : titleCase(s.city)}</Badge>
                   <Badge tone={state === 'live' ? 'green' : state === 'scheduled' ? 'outline' : 'gray'}>{t(`admin.${state}` as MessageKey)}</Badge>
                 </div>
                 <p className="mt-2 text-xs text-ink/60">
@@ -145,7 +145,7 @@ export default function AdminSponsors() {
                   <Button variant="outline" className="min-h-9 py-1" onClick={() => setEditing(s)}>
                     {t('common.edit')}
                   </Button>
-                  <Button variant="ghost" className="min-h-9 py-1 text-crimson" onClick={() => remove(s)}>
+                  <Button variant="ghost" className="min-h-9 py-1 text-vine" onClick={() => remove(s)}>
                     {t('common.delete')}
                   </Button>
                 </div>

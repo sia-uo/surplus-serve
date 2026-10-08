@@ -43,7 +43,7 @@ export default function AdminMessages() {
               <Card key={m.id} className={m.handled ? 'opacity-70' : ''}>
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <p className="font-semibold text-navy">
+                    <p className="font-semibold text-verd">
                       {m.name} {m.organisation && <span className="font-normal text-ink/70">· {m.organisation}</span>}
                     </p>
                     <p className="text-sm text-ink/70">
@@ -55,7 +55,7 @@ export default function AdminMessages() {
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge tone={m.kind === 'sponsor' ? 'gold' : 'navy'}>{t(`admin.kind.${m.kind}` as MessageKey)}</Badge>
+                    <Badge tone={m.kind === 'sponsor' ? 'gold' : 'verd'}>{t(`admin.kind.${m.kind}` as MessageKey)}</Badge>
                     <span className="text-xs text-ink/60">{fmtDateTime(m.createdAt, intl)}</span>
                   </div>
                 </div>

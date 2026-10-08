@@ -17,7 +17,7 @@ export default function NgoProfilePage() {
       {ngo && (
         <div className="mb-4 flex flex-wrap gap-2">
           <Badge tone={ngo.verification === 'approved' ? 'green' : ngo.verification === 'rejected' ? 'red' : 'gold'}>{t(`verification.${ngo.verification}` as MessageKey)}</Badge>
-          <Badge tone="navy">
+          <Badge tone="verd">
             🛡 {t('profile.scoreReliability')}: {ngo.reliabilityScore}
           </Badge>
           <Badge tone="outline">

@@ -26,7 +26,7 @@ function LanguageSwitcher({ className }: { className?: string }) {
           setLocale(l);
           if (user) void api.patch('/api/me/locale', { locale: l }).catch(() => undefined);
         }}
-        className="min-h-10 cursor-pointer appearance-none rounded-full border border-gold/50 bg-navy-800 py-1.5 pr-4 pl-8 text-sm text-ivory hover:border-gold focus:outline-none"
+        className="min-h-10 cursor-pointer appearance-none rounded-full border border-gold/50 bg-verd-800 py-1.5 pr-4 pl-8 text-sm text-ivory hover:border-gold focus:outline-none"
       >
         {LOCALES.map((l) => (
           <option key={l} value={l}>
@@ -93,7 +93,7 @@ function Header() {
   );
 
   return (
-    <header className="no-print sticky top-0 whitespace-nowrap z-[900] border-b border-gold/25 bg-navy/85 backdrop-blur-md">
+    <header className="no-print sticky top-0 whitespace-nowrap z-[900] bg-verd/85 shadow-[0_1px_0_rgb(207_166_74/0.35),0_10px_30px_-20px_rgb(0_0_0/0.8)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
         <Logo to={user?.role ? homeFor(user.role) : '/'} />
         <nav className="hidden items-center gap-1 xl:flex" aria-label="Main">
@@ -121,7 +121,7 @@ function Header() {
         </button>
       </div>
       {open && (
-        <div id="mobile-nav" className="animate-rise border-t border-gold/20 bg-navy px-4 pt-2 pb-5 xl:hidden">
+        <div id="mobile-nav" className="animate-rise border-t border-gold/20 bg-verd px-4 pt-2 pb-5 xl:hidden">
           <nav className="flex flex-col gap-1" aria-label="Main">
             {items.map((i) => (
               <NavLink key={i.to} to={i.to} end={i.end} className={i.to.includes('#') ? linkClass({ isActive: false }) : linkClass}>
@@ -144,7 +144,7 @@ function Header() {
 function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="no-print mt-20 border-t border-gold/25 bg-navy-950/60">
+    <footer className="no-print relative mt-20 border-t border-gold/25 bg-gradient-to-b from-verd-950/40 to-verd-950/90">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-3">
         <div>
           <Logo />
@@ -172,7 +172,7 @@ export function OfflineBanner() {
   const { t } = useI18n();
   if (online) return null;
   return (
-    <div role="status" className="no-print bg-crimson px-4 py-2 text-center text-sm font-medium text-white">
+    <div role="status" className="no-print bg-vine px-4 py-2 text-center text-sm font-medium text-white">
       {t('common.offline')}
     </div>
   );
@@ -190,7 +190,7 @@ export function Layout() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <a href="#main" className="sr-only rounded bg-gold px-3 py-2 text-navy focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[1000]">
+      <a href="#main" className="sr-only rounded bg-gold px-3 py-2 text-verd focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[1000]">
         Skip to content
       </a>
       <OfflineBanner />

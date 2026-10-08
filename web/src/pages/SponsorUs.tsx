@@ -52,7 +52,7 @@ export default function SponsorUs() {
           ))}
         </div>
         <Card>
-          <h2 className="mb-4 font-serif text-2xl font-bold text-navy">{t('sponsorUs.formTitle')}</h2>
+          <h2 className="mb-4 font-serif text-2xl font-bold text-verd">{t('sponsorUs.formTitle')}</h2>
           {sent ? (
             <Alert tone="success">✓ {t('sponsorUs.sent')}</Alert>
           ) : (

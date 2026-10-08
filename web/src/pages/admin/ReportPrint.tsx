@@ -28,7 +28,7 @@ export default function ReportPrint() {
           <Crest className="size-20" />
           <div>
             <p className="text-xs font-semibold tracking-[0.2em] text-gold-dark uppercase">SurplusServe</p>
-            <h1 className="font-serif text-3xl font-bold text-navy">{t('admin.reportTitle')}</h1>
+            <h1 className="font-serif text-3xl font-bold text-verd">{t('admin.reportTitle')}</h1>
             <p className="text-ink/70">
               {data.city} · {fmtDate(data.from, intl)} – {fmtDate(data.to, intl)}
             </p>
@@ -36,10 +36,10 @@ export default function ReportPrint() {
         </header>
         {data.sponsors.length > 0 && (
           <section className="my-6 rounded-2xl border border-gold/50 bg-ivory p-5 text-center">
-            <p className="font-serif text-lg text-navy">{t('city.supportedBy', { city: data.city })}</p>
+            <p className="font-serif text-lg text-verd">{t('city.supportedBy', { city: data.city })}</p>
             <div className="mt-3 flex flex-wrap items-center justify-center gap-6">
               {data.sponsors.map((s) =>
-                s.logoUrl ? <img key={s.id} src={s.logoUrl} alt={s.name} className="max-h-12" /> : <strong key={s.id} className="font-serif text-xl text-navy">{s.name}</strong>,
+                s.logoUrl ? <img key={s.id} src={s.logoUrl} alt={s.name} className="max-h-12" /> : <strong key={s.id} className="font-serif text-xl text-verd">{s.name}</strong>,
               )}
             </div>
           </section>

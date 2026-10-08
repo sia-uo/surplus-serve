@@ -61,8 +61,26 @@ export function adminEmails(env: Env): string[] {
     .filter(Boolean);
 }
 
+/**
+ * True for requests served by local `wrangler dev`. With a custom-domain route,
+ * wrangler rewrites local request URLs to the production host, so we also check
+ * the client IP: Cloudflare sets CF-Connecting-IP to the real client in
+ * production (clients cannot spoof it), and to loopback locally.
+ */
+export function isLocalDev(req: Request): boolean {
+  const host = new URL(req.url).hostname;
+  const ip = req.headers.get('cf-connecting-ip') ?? '';
+  return host === 'localhost' || host === '127.0.0.1' || ip === '127.0.0.1' || ip === '::1';
+}
+
+/** Public origin the browser is using (APP_URL when developing locally, since the request URL is rewritten). */
+export function requestOrigin(env: Env, req: Request): string {
+  if (isLocalDev(req) && env.APP_URL) return env.APP_URL.replace(/\/$/, '');
+  return new URL(req.url).origin;
+}
+
 export function appUrl(env: Env, req?: Request): string {
-  if (req) return new URL(req.url).origin;
+  if (req) return requestOrigin(env, req);
   return (env.APP_URL ?? '').replace(/\/$/, '');
 }
 

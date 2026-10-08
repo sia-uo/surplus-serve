@@ -69,7 +69,7 @@ export default function MapView({ center, zoom = 13, markers = [], me, radiusKm,
     g.clearLayers();
     if (me) {
       L.marker([me.lat, me.lng], { icon: L.divIcon({ className: '', html: '<div class="ss-marker me"></div>', iconSize: [18, 18], iconAnchor: [9, 9] }), keyboard: false }).addTo(g);
-      if (radiusKm) L.circle([me.lat, me.lng], { radius: radiusKm * 1000, color: '#C9A227', weight: 1.5, fillOpacity: 0.06 }).addTo(g);
+      if (radiusKm) L.circle([me.lat, me.lng], { radius: radiusKm * 1000, color: '#8FBF6C', weight: 1.5, fillOpacity: 0.06 }).addTo(g);
     }
     const bounds: L.LatLngExpression[] = [];
     for (const mk of markers) {

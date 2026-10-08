@@ -177,7 +177,7 @@ export default function NewListing() {
             <Button type="submit" loading={busy} disabled={uploading} className="px-8">
               {busy ? t('newListing.posting') : t('newListing.post')}
             </Button>
-            <Link to="/restaurant/recurring" className="text-sm text-navy underline">
+            <Link to="/restaurant/recurring" className="text-sm text-verd underline">
               {t('newListing.makeRecurring')}
             </Link>
           </div>

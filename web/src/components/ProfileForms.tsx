@@ -162,7 +162,7 @@ export function NgoProfileForm({ initial, onSaved }: { initial: NgoProfile | nul
             <input type="file" accept="application/pdf,image/jpeg,image/png" className="sr-only" onChange={(e) => onFile(e.target.files?.[0])} disabled={uploading} />
           </label>
           {form.certificateKey && (
-            <a href={`/api/files/${form.certificateKey}`} target="_blank" rel="noreferrer" className="text-sm font-medium text-navy underline">
+            <a href={`/api/files/${form.certificateKey}`} target="_blank" rel="noreferrer" className="text-sm font-medium text-verd underline">
               📄 {t('profile.viewCert')}
             </a>
           )}
@@ -182,7 +182,7 @@ export function NgoProfileForm({ initial, onSaved }: { initial: NgoProfile | nul
                 type="button"
                 key={r}
                 onClick={() => setForm({ ...form, alertRadiusKm: r })}
-                className={`chip ${form.alertRadiusKm === r ? 'border-gold bg-gold text-navy' : 'border-ink/20 text-ink'}`}
+                className={`chip ${form.alertRadiusKm === r ? 'border-gold bg-gold text-verd' : 'border-ink/20 text-ink'}`}
                 aria-pressed={form.alertRadiusKm === r}
               >
                 {r} km

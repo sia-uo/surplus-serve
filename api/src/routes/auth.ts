@@ -4,7 +4,7 @@ import { z } from 'zod';
 import type { AppEnv, Env } from '../env';
 import { clearSession, createSession } from '../lib/session';
 import { rateLimit } from '../lib/ratelimit';
-import { adminEmails, fail, newId, now, parse, readJson } from '../lib/util';
+import { adminEmails, fail, isLocalDev, newId, now, parse, readJson, requestOrigin } from '../lib/util';
 
 const STATE_COOKIE = 'ss_oauth';
 
@@ -45,9 +45,9 @@ auth.get('/google', (c) => {
   if (!c.env.GOOGLE_CLIENT_ID) fail(503, 'Google Sign-In is not configured');
   const state = newId();
   const next = safeNext(c.req.query('next'));
-  const secure = new URL(c.req.url).protocol === 'https:';
+  const secure = new URL(requestOrigin(c.env, c.req.raw)).protocol === 'https:';
   setCookie(c, STATE_COOKIE, `${state}|${next}`, { httpOnly: true, secure, sameSite: 'Lax', path: '/api/auth', maxAge: 600 });
-  const origin = new URL(c.req.url).origin;
+  const origin = requestOrigin(c.env, c.req.raw);
   const url = new URL('https://accounts.google.com/o/oauth2/v2/auth');
   url.searchParams.set('client_id', c.env.GOOGLE_CLIENT_ID);
   url.searchParams.set('redirect_uri', `${origin}/api/auth/google/callback`);
@@ -59,7 +59,7 @@ auth.get('/google', (c) => {
 });
 
 auth.get('/google/callback', async (c) => {
-  const origin = new URL(c.req.url).origin;
+  const origin = requestOrigin(c.env, c.req.raw);
   const cookie = getCookie(c, STATE_COOKIE) ?? '';
   deleteCookie(c, STATE_COOKIE, { path: '/api/auth' });
   const [expectedState, next] = cookie.split('|');
@@ -112,8 +112,7 @@ auth.post('/logout', (c) => {
 
 /** Local development only: sign in by email without Google (requires DEV_LOGIN=true and localhost). */
 auth.post('/dev-login', async (c) => {
-  const host = new URL(c.req.url).hostname;
-  if (c.env.DEV_LOGIN !== 'true' || !['localhost', '127.0.0.1'].includes(host)) fail(404, 'Not found');
+  if (c.env.DEV_LOGIN !== 'true' || !isLocalDev(c.req.raw)) fail(404, 'Not found');
   const body = parse(z.object({ email: z.email(), name: z.string().max(100).optional() }), await readJson(c.req.raw));
   const user = await upsertUser(c.env, { email: body.email, name: body.name ?? '' });
   await createSession(c, user.id);

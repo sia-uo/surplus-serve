@@ -111,24 +111,24 @@ export async function emailAdmins(env: Env, subject: string, html: string) {
 
 export function layout(env: Env, baseUrl: string, title: string, body: string): string {
   const app = escapeHtml(env.APP_NAME || 'SurplusServe');
-  return `<!doctype html><html><body style="margin:0;background:#F8F5EC;font-family:Inter,Arial,sans-serif;color:#0B1F3A">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#F8F5EC;padding:24px 0"><tr><td align="center">
-<table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border:1px solid #C9A227;border-radius:14px;overflow:hidden">
-<tr><td style="background:#0B1F3A;padding:20px 28px;border-bottom:3px solid #C9A227">
-<span style="font-family:Georgia,serif;font-size:22px;color:#C9A227;font-weight:bold;letter-spacing:.5px">${app}</span></td></tr>
+  return `<!doctype html><html><body style="margin:0;background:#F8F4E8;font-family:Inter,Arial,sans-serif;color:#0F2A1F">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#F8F4E8;padding:24px 0"><tr><td align="center">
+<table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border:1px solid #CFA64A;border-radius:14px;overflow:hidden">
+<tr><td style="background:#0F2A1F;padding:20px 28px;border-bottom:3px solid #CFA64A">
+<span style="font-family:Georgia,serif;font-size:22px;color:#CFA64A;font-weight:bold;letter-spacing:.5px">${app}</span></td></tr>
 <tr><td style="padding:28px">
-<h1 style="font-family:Georgia,serif;font-size:22px;margin:0 0 16px;color:#0B1F3A">${escapeHtml(title)}</h1>
+<h1 style="font-family:Georgia,serif;font-size:22px;margin:0 0 16px;color:#0F2A1F">${escapeHtml(title)}</h1>
 ${body}
 </td></tr>
-<tr><td style="padding:16px 28px;background:#F8F5EC;font-size:12px;color:#555">
+<tr><td style="padding:16px 28px;background:#F8F4E8;font-size:12px;color:#555">
 ${app} only connects restaurants and NGOs. Food is shared free of charge; NGOs pay only the stated packaging cost directly to the restaurant at pickup.
-<br><a href="${baseUrl}" style="color:#B3121F">${escapeHtml(baseUrl.replace(/^https?:\/\//, ''))}</a></td></tr>
+<br><a href="${baseUrl}" style="color:#7A1F3D">${escapeHtml(baseUrl.replace(/^https?:\/\//, ''))}</a></td></tr>
 </table></td></tr></table></body></html>`;
 }
 
 const p = (s: string) => `<p style="font-size:15px;line-height:1.6;margin:0 0 12px">${s}</p>`;
 const button = (href: string, label: string) =>
-  `<p style="margin:20px 0"><a href="${href}" style="background:#B3121F;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;display:inline-block">${escapeHtml(label)}</a></p>`;
+  `<p style="margin:20px 0"><a href="${href}" style="background:#7A1F3D;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;display:inline-block">${escapeHtml(label)}</a></p>`;
 
 export const templates = {
   welcome(env: Env, base: string, name: string, role: 'restaurant' | 'ngo') {
@@ -160,7 +160,7 @@ export const templates = {
         base,
         'Your claim is confirmed',
         p(`Hi ${escapeHtml(d.ngoName)}, you claimed <strong>${d.servings} servings</strong> of <strong>${escapeHtml(d.title)}</strong>.`) +
-          `<p style="font-size:30px;letter-spacing:8px;font-weight:bold;color:#B3121F;margin:16px 0;font-family:monospace">${d.otp}</p>` +
+          `<p style="font-size:30px;letter-spacing:8px;font-weight:bold;color:#7A1F3D;margin:16px 0;font-family:monospace">${d.otp}</p>` +
           p('Show this OTP to the restaurant at pickup.') +
           p(`<strong>${escapeHtml(d.restaurantName)}</strong><br>${escapeHtml(d.address)}<br>Phone: ${escapeHtml(d.phone)}`) +
           p(`Collect by: <strong>${escapeHtml(d.pickupBy)}</strong> (IST)`) +
@@ -193,7 +193,7 @@ export const templates = {
     const rows = d.listings
       .map(
         (l) =>
-          `<tr><td style="padding:8px 0;border-bottom:1px solid #eee"><strong>${escapeHtml(l.title)}</strong>${l.urgent ? ' <span style="background:#B3121F;color:#fff;border-radius:6px;padding:1px 6px;font-size:11px">URGENT</span>' : ''}<br><span style="font-size:13px;color:#555">${l.servings} servings · ${escapeHtml(l.distance)} away · safe until ${escapeHtml(l.safeUntil)}</span></td></tr>`,
+          `<tr><td style="padding:8px 0;border-bottom:1px solid #eee"><strong>${escapeHtml(l.title)}</strong>${l.urgent ? ' <span style="background:#7A1F3D;color:#fff;border-radius:6px;padding:1px 6px;font-size:11px">URGENT</span>' : ''}<br><span style="font-size:13px;color:#555">${l.servings} servings · ${escapeHtml(l.distance)} away · safe until ${escapeHtml(l.safeUntil)}</span></td></tr>`,
       )
       .join('');
     return {

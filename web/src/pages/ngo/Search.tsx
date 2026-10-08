@@ -33,16 +33,16 @@ export function ClaimSuccess({ claim }: { claim: Claim }) {
   return (
     <div className="space-y-4">
       <Alert tone="success">✓ {t('claimModal.success')}</Alert>
-      <div className="rounded-2xl border-2 border-dashed border-crimson/50 bg-white p-5 text-center">
+      <div className="rounded-2xl border-2 border-dashed border-vine/50 bg-white p-5 text-center">
         <p className="text-xs font-semibold tracking-widest text-ink/60 uppercase">{t('claimModal.otp')}</p>
-        <p className="mt-1 font-mono text-5xl font-bold tracking-[0.3em] text-crimson" aria-live="polite">
+        <p className="mt-1 font-mono text-5xl font-bold tracking-[0.3em] text-vine" aria-live="polite">
           {claim.otp}
         </p>
         <p className="mt-2 text-sm text-ink/70">{t('claims.collectBy', { time: fmtDateTime(claim.pickupBy, intl) })}</p>
       </div>
       {r && (
         <div className="rounded-xl bg-ivory-200 p-4 text-sm text-ink">
-          <p className="font-serif text-lg font-bold text-navy">{r.name}</p>
+          <p className="font-serif text-lg font-bold text-verd">{r.name}</p>
           <p>{r.address}</p>
           {r.upiId && <p className="mt-1">{t('claimModal.upi', { id: r.upiId })}</p>}
           <div className="mt-3 flex flex-wrap gap-2">
@@ -93,7 +93,7 @@ function ClaimDialog({ listing, onClose, onClaimed }: { listing: Listing; onClos
       ) : (
         <form onSubmit={submit} className="space-y-4">
           <div>
-            <p className="font-serif text-lg font-bold text-navy">{listing.title}</p>
+            <p className="font-serif text-lg font-bold text-verd">{listing.title}</p>
             <p className="text-sm text-ink/70">{listing.restaurantName}</p>
           </div>
           {listing.allergens.length > 0 && (
@@ -122,7 +122,7 @@ function ClaimDialog({ listing, onClose, onClaimed }: { listing: Listing; onClos
             <span className="hint">{t('claimModal.max', { n: listing.servingsRemaining })}</span>
           </label>
           {listing.packagingCost > 0 && <p className="rounded-xl bg-gold/10 p-3 text-sm text-ink">📦 {t('claimModal.payNote', { amount: listing.packagingCost * servings })}</p>}
-          <div className="rounded-xl border border-crimson/30 bg-crimson/5 p-2">
+          <div className="rounded-xl border border-vine/30 bg-vine/5 p-2">
             <Checkbox checked={ack} onChange={setAck}>
               {t('claimModal.ack')}
             </Checkbox>
@@ -274,7 +274,7 @@ export default function NgoSearch() {
             <span className="label">{t('search.radius')}</span>
             <div className="flex gap-1.5" role="radiogroup">
               {RADIUS_OPTIONS_KM.map((r) => (
-                <button key={r} type="button" role="radio" aria-checked={radius === r} onClick={() => setRadius(r)} className={cx('chip', radius === r ? 'border-navy bg-navy text-gold' : 'border-ink/20 bg-white text-ink')}>
+                <button key={r} type="button" role="radio" aria-checked={radius === r} onClick={() => setRadius(r)} className={cx('chip', radius === r ? 'border-verd bg-verd text-gold' : 'border-ink/20 bg-white text-ink')}>
                   {r} km
                 </button>
               ))}
@@ -295,9 +295,9 @@ export default function NgoSearch() {
             <span className="label">{t('search.minServings')}</span>
             <input className="input w-28" type="number" min={1} inputMode="numeric" value={minServings} onChange={(e) => setMinServings(e.target.value)} />
           </label>
-          <div className="ml-auto flex overflow-hidden rounded-full border border-navy" role="tablist">
+          <div className="ml-auto flex overflow-hidden rounded-full border border-verd" role="tablist">
             {(['list', 'map'] as const).map((v) => (
-              <button key={v} role="tab" aria-selected={view === v} onClick={() => setView(v)} className={cx('min-h-10 px-4 text-sm font-semibold', view === v ? 'bg-navy text-gold' : 'bg-white text-navy')}>
+              <button key={v} role="tab" aria-selected={view === v} onClick={() => setView(v)} className={cx('min-h-10 px-4 text-sm font-semibold', view === v ? 'bg-verd text-gold' : 'bg-white text-verd')}>
                 {v === 'list' ? `☰ ${t('search.list')}` : `🗺 ${t('search.map')}`}
               </button>
             ))}
@@ -324,7 +324,7 @@ export default function NgoSearch() {
           ) : view === 'map' ? (
             <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
               <div className="overflow-hidden rounded-2xl border border-gold/50">
-                <Suspense fallback={<div className="grid h-[60vh] place-items-center bg-navy-800"><Spinner className="text-gold" /></div>}>
+                <Suspense fallback={<div className="grid h-[60vh] place-items-center bg-verd-800"><Spinner className="text-gold" /></div>}>
                   <MapView
                     className="h-[60vh] w-full"
                     center={place}

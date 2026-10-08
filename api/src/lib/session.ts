@@ -3,7 +3,7 @@ import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 import { sign, verify } from 'hono/jwt';
 import type { Role } from '../../../shared/types';
 import type { AppEnv, Env, SessionUser } from '../env';
-import { fail } from './util';
+import { fail, requestOrigin } from './util';
 
 export const SESSION_COOKIE = 'ss_session';
 const SESSION_TTL_S = 30 * 24 * 3600;
@@ -13,8 +13,8 @@ function secret(env: Env): string {
   return env.JWT_SECRET;
 }
 
-function isSecure(c: Context) {
-  return new URL(c.req.url).protocol === 'https:';
+function isSecure(c: Context<AppEnv>) {
+  return new URL(requestOrigin(c.env, c.req.raw)).protocol === 'https:';
 }
 
 export async function createSession(c: Context<AppEnv>, userId: string) {

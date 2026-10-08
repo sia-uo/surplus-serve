@@ -28,7 +28,7 @@ export default function AdminShell() {
             key={l.to}
             to={l.to}
             end={l.end}
-            className={({ isActive }) => cx('chip shrink-0', isActive ? 'border-gold bg-gold text-navy' : 'border-gold/30 text-ivory hover:border-gold')}
+            className={({ isActive }) => cx('chip shrink-0', isActive ? 'border-gold bg-gold text-verd' : 'border-gold/30 text-ivory hover:border-gold')}
           >
             {t(l.key)}
           </NavLink>

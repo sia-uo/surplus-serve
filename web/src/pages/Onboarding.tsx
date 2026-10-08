@@ -43,7 +43,7 @@ export default function Onboarding() {
       <PageHeader eyebrow="SurplusServe" title={t('onboarding.title')} />
       {!user.role ? (
         <Card>
-          <h2 className="font-serif text-xl font-bold text-navy">{t('onboarding.chooseRole')}</h2>
+          <h2 className="font-serif text-xl font-bold text-verd">{t('onboarding.chooseRole')}</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2" role="radiogroup">
             {(
               [
@@ -59,13 +59,13 @@ export default function Onboarding() {
                 onClick={() => setChoice(value)}
                 className={cx(
                   'rounded-2xl border-2 p-5 text-left transition',
-                  choice === value ? 'border-crimson bg-crimson/5 shadow-lg' : 'border-ink/15 bg-white hover:border-gold-dark',
+                  choice === value ? 'border-vine bg-vine/5 shadow-lg' : 'border-ink/15 bg-white hover:border-gold-dark',
                 )}
               >
                 <span className="text-4xl" aria-hidden>
                   {icon}
                 </span>
-                <span className="mt-3 block font-serif text-xl font-bold text-navy">{label}</span>
+                <span className="mt-3 block font-serif text-xl font-bold text-verd">{label}</span>
                 <span className="mt-1 block text-sm text-ink/70">{desc}</span>
               </button>
             ))}
@@ -82,7 +82,7 @@ export default function Onboarding() {
         </Card>
       ) : (
         <Card>
-          <h2 className="mb-5 font-serif text-xl font-bold text-navy">{t('onboarding.profileTitle')}</h2>
+          <h2 className="mb-5 font-serif text-xl font-bold text-verd">{t('onboarding.profileTitle')}</h2>
           {user.role === 'restaurant' ? (
             <RestaurantProfileForm initial={null} onSaved={() => navigate(homeFor('restaurant'))} />
           ) : (

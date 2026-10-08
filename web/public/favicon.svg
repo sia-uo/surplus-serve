@@ -1,27 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SurplusServe crest">
   <defs>
     <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#EBD27A"/>
-      <stop offset=".5" stop-color="#C9A227"/>
-      <stop offset="1" stop-color="#8F7114"/>
+      <stop offset="0" stop-color="#F0D998"/>
+      <stop offset=".5" stop-color="#CFA64A"/>
+      <stop offset="1" stop-color="#8A6A1E"/>
     </linearGradient>
-    <linearGradient id="navy" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#16345F"/>
-      <stop offset="1" stop-color="#0B1F3A"/>
+    <linearGradient id="verd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22573F"/>
+      <stop offset="1" stop-color="#0F2A1F"/>
     </linearGradient>
     <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#CF1F2D"/>
-      <stop offset="1" stop-color="#8E0E18"/>
+      <stop offset="0" stop-color="#9E2D55"/>
+      <stop offset="1" stop-color="#5C1730"/>
     </linearGradient>
     <path id="star" d="M0,-13 L3.06,-4.21 L12.36,-4.02 L4.95,1.61 L7.64,10.52 L0,5.2 L-7.64,10.52 L-4.95,1.61 L-12.36,-4.02 L-3.06,-4.21 Z"/>
     <ellipse id="leaf" rx="13" ry="6"/>
   </defs>
 
-  <!-- shield: gold rim, navy field -->
+  <!-- shield: gold rim, verd field -->
   <path d="M256 18 L454 76 V238 C454 364 371 448 256 496 C141 448 58 364 58 238 V76 Z" fill="url(#gold)"/>
-  <path d="M256 42 L432 93 V238 C432 350 358 426 256 470 C154 426 80 350 80 238 V93 Z" fill="url(#navy)"/>
+  <path d="M256 42 L432 93 V238 C432 350 358 426 256 470 C154 426 80 350 80 238 V93 Z" fill="url(#verd)"/>
 
-  <!-- crimson chevron band with stars -->
+  <!-- vine chevron band with stars -->
   <path d="M80 93 L256 42 L432 93 V152 L256 110 L80 152 Z" fill="url(#red)"/>
   <path d="M80 152 L256 110 L432 152" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linejoin="round"/>
   <use href="#star" transform="translate(200 102)" fill="url(#gold)"/>
@@ -29,12 +29,12 @@
   <use href="#star" transform="translate(312 102)" fill="url(#gold)"/>
 
   <!-- inner pinstripe -->
-  <path d="M256 60 L416 106 V238 C416 340 350 410 256 452 C162 410 96 340 96 238 V106 Z" fill="none" stroke="#C9A227" stroke-opacity=".45" stroke-width="3"/>
+  <path d="M256 60 L416 106 V238 C416 340 350 410 256 452 C162 410 96 340 96 238 V106 Z" fill="none" stroke="#8FBF6C" stroke-opacity=".45" stroke-width="3"/>
 
   <!-- serving cloche with heart -->
   <circle cx="256" cy="196" r="13" fill="url(#gold)"/>
   <path d="M156 304 C156 243 201 208 256 208 C311 208 356 243 356 304 Z" fill="url(#gold)"/>
-  <path d="M180 290 C182 252 210 228 244 222" fill="none" stroke="#F8F5EC" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/>
+  <path d="M180 290 C182 252 210 228 244 222" fill="none" stroke="#F8F4E8" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/>
   <rect x="136" y="310" width="240" height="18" rx="9" fill="url(#gold)"/>
   <path d="M256 290 C234 273 220 260 220 245 C220 232 230 225 240 225 C247 225 253 229 256 235 C259 229 265 225 272 225 C282 225 292 232 292 245 C292 260 278 273 256 290 Z" fill="url(#red)"/>
 
@@ -51,5 +51,12 @@
     <use href="#leaf" transform="translate(316 388) rotate(42)"/>
     <use href="#leaf" transform="translate(294 404) rotate(24)"/>
   </g>
-  <circle cx="256" cy="422" r="7" fill="#B3121F" stroke="url(#gold)" stroke-width="3"/>
+  <!-- grape cluster -->
+  <g fill="url(#red)" stroke="url(#gold)" stroke-width="2">
+    <circle cx="248" cy="420" r="7"/>
+    <circle cx="264" cy="420" r="7"/>
+    <circle cx="256" cy="432" r="7"/>
+    <circle cx="256" cy="409" r="6"/>
+  </g>
+  <path d="M256 403 C258 396 263 392 270 391" fill="none" stroke="#8FBF6C" stroke-width="3" stroke-linecap="round"/>
 </svg>

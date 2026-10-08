@@ -23,7 +23,7 @@ export function ReportBody({ report }: { report: SponsorReport }) {
       </div>
       {report.daily.length > 0 && (
         <Card>
-          <h3 className="mb-3 font-serif text-lg font-bold text-navy">{t('admin.daily')}</h3>
+          <h3 className="mb-3 font-serif text-lg font-bold text-verd">{t('admin.daily')}</h3>
           <div className="flex h-40 items-end gap-0.5" role="img" aria-label={t('admin.daily')}>
             {report.daily.map((d) => (
               <div key={d.date} title={`${d.date}: ${d.meals}`} className="min-w-1 flex-1 rounded-t bg-gradient-to-t from-gold-dark to-gold" style={{ height: `${Math.max(2, (d.meals / max) * 100)}%` }} />
@@ -43,7 +43,7 @@ export function ReportBody({ report }: { report: SponsorReport }) {
           ] as const
         ).map(([title, rows]) => (
           <Card key={title}>
-            <h3 className="mb-3 font-serif text-lg font-bold text-navy">{title}</h3>
+            <h3 className="mb-3 font-serif text-lg font-bold text-verd">{title}</h3>
             <table className="w-full text-left text-sm text-ink">
               <thead className="text-xs text-ink/60 uppercase">
                 <tr>

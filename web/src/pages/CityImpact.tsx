@@ -64,7 +64,7 @@ export default function CityImpact() {
           <ol className="card divide-y divide-ink/10 p-0">
             {data.topRestaurants.map((r, i) => (
               <li key={r.name + i} className="flex items-center justify-between gap-3 px-5 py-3">
-                <span className="flex flex-wrap items-center gap-2 font-medium text-navy">
+                <span className="flex flex-wrap items-center gap-2 font-medium text-verd">
                   <span className="font-serif text-gold-dark">{i + 1}.</span> {r.name} {r.premium && <PartnerBadge />}
                 </span>
                 <span className="text-sm whitespace-nowrap text-ink/70">{t('city.meals', { n: fmtNumber(r.meals, intl) })}</span>

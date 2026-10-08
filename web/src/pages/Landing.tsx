@@ -4,6 +4,7 @@ import { CO2_PER_KG_FOOD, KG_PER_MEAL } from '../../../shared/constants';
 import type { ImpactStats, Sponsor } from '../../../shared/types';
 import { InstallButton } from '../components/Install';
 import { Crest } from '../components/Logo';
+import { Leaf, VineDivider, VineFlourish } from '../components/Ornaments';
 import { ErrorState, LinkButton } from '../components/ui';
 import { useI18n, type MessageKey } from '../i18n';
 import { homeFor, useAuth } from '../lib/auth';
@@ -43,7 +44,7 @@ export function SponsorStrip({ sponsors }: { sponsors: Sponsor[] }) {
             className="flex h-20 min-w-40 items-center justify-center gap-3 rounded-2xl border border-gold/40 bg-ivory px-5 transition hover:-translate-y-0.5 hover:border-gold"
             title={s.name}
           >
-            {s.logoUrl ? <img src={s.logoUrl} alt={s.name} className="max-h-12 max-w-36 object-contain" loading="lazy" /> : <span className="font-serif text-lg font-bold text-navy">{s.name}</span>}
+            {s.logoUrl ? <img src={s.logoUrl} alt={s.name} className="max-h-12 max-w-36 object-contain" loading="lazy" /> : <span className="font-serif text-lg font-bold text-verd">{s.name}</span>}
             {s.tier === 'platinum' && <span className="text-gold-dark" aria-hidden>♛</span>}
           </a>
         </li>
@@ -101,20 +102,22 @@ export default function Landing() {
               <InstallButton variant="gold-solid" />
             </div>
           </div>
-          <div className="relative mx-auto hidden w-full max-w-sm sm:block">
-            <div className="absolute inset-0 rounded-full bg-gold/20 blur-3xl" aria-hidden />
-            <Crest className="relative mx-auto size-72 drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] lg:size-80" />
+          <div className="relative mx-auto hidden w-full max-w-md sm:block">
+            <div className="absolute inset-8 rounded-full bg-gradient-to-br from-leaf/25 via-gold/20 to-vine/30 blur-3xl" aria-hidden />
+            <VineFlourish className="absolute -top-10 left-0 h-[26rem] w-auto opacity-90" />
+            <VineFlourish flip className="absolute -top-4 right-0 h-[24rem] w-auto opacity-75 [animation-delay:-3s]" />
+            <Crest className="relative mx-auto size-72 animate-float drop-shadow-[0_24px_40px_rgba(0,0,0,0.55)] lg:size-80" />
           </div>
         </div>
-        <div className="gold-rule mx-auto max-w-5xl" />
+        <VineDivider className="pb-2" />
       </section>
 
       {/* Live impact */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6" aria-labelledby="impact-h">
         <div className="mb-6 flex items-center gap-3">
           <span className="relative flex size-3" aria-hidden>
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-crimson opacity-75" />
-            <span className="relative inline-flex size-3 rounded-full bg-crimson" />
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-vine opacity-75" />
+            <span className="relative inline-flex size-3 rounded-full bg-vine" />
           </span>
           <h2 id="impact-h" className="text-2xl font-bold text-ivory sm:text-3xl">
             {t('landing.liveImpact')}
@@ -125,8 +128,9 @@ export default function Landing() {
         ) : (
           <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
             {stats.map((s) => (
-              <div key={s.key} className="rounded-2xl border border-gold/35 bg-navy-800/60 p-4 text-center backdrop-blur">
-                <div className="text-2xl" aria-hidden>
+              <div key={s.key} className="card-dark group relative overflow-hidden p-4 text-center transition hover:-translate-y-1">
+                <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-leaf via-gold to-vine-400" aria-hidden />
+                <div className="mx-auto grid size-11 place-items-center rounded-full bg-ivory/10 text-2xl ring-1 ring-gold/30 transition group-hover:scale-110" aria-hidden>
                   {s.icon}
                 </div>
                 <div className="gold-text mt-1 font-serif text-2xl font-bold sm:text-3xl" aria-live="polite">
@@ -139,6 +143,8 @@ export default function Landing() {
         )}
       </section>
 
+      <VineDivider />
+
       {/* How it works */}
       <section id="how" className="mx-auto max-w-7xl scroll-mt-20 px-4 py-14 sm:px-6">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">
@@ -146,12 +152,13 @@ export default function Landing() {
         </h2>
         <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(([title, body, icon], i) => (
-            <li key={title} className="card relative p-6">
-              <span className="absolute -top-4 left-6 grid size-9 place-items-center rounded-full border-2 border-gold bg-navy font-serif font-bold text-gold">{i + 1}</span>
+            <li key={title} className="card relative p-6 pt-8 transition hover:-translate-y-1">
+              <span className="absolute -top-4 left-6 grid size-10 place-items-center rounded-full border-2 border-gold bg-gradient-to-br from-verd-600 to-verd font-serif text-lg font-bold text-gold shadow-lg">{i + 1}</span>
+              {i < steps.length - 1 && <Leaf className="absolute top-1/2 -right-4 z-10 hidden size-6 -translate-y-1/2 rotate-45 text-leaf lg:block" />}
               <div className="mt-2 text-3xl" aria-hidden>
                 {icon}
               </div>
-              <h3 className="mt-3 text-xl font-bold text-navy">{t(title)}</h3>
+              <h3 className="mt-3 text-xl font-bold text-verd">{t(title)}</h3>
               <p className="mt-2 text-sm text-ink/80">{t(body)}</p>
             </li>
           ))}
@@ -174,9 +181,7 @@ export default function Landing() {
             <ul className="mt-5 space-y-3">
               {items.map((k) => (
                 <li key={k} className="flex gap-3 text-ivory/90">
-                  <span className="mt-0.5 text-gold" aria-hidden>
-                    ✦
-                  </span>
+                  <Leaf className="mt-1 size-4 shrink-0 text-leaf" />
                   {t(k)}
                 </li>
               ))}
@@ -188,12 +193,14 @@ export default function Landing() {
       {/* Pricing / model */}
       <section className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
         <div className="card relative overflow-hidden p-8 text-center">
-          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-crimson via-gold to-crimson" />
-          <h2 className="text-3xl font-bold text-navy">{t('pricing.title')}</h2>
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-leaf via-gold to-vine" />
+          <h2 className="text-3xl font-bold text-verd">{t('pricing.title')}</h2>
           <p className="mx-auto mt-3 max-w-2xl text-ink/80">{t('pricing.body', { cap })}</p>
           <p className="mt-4 text-xs text-ink/60">{t('impact.methodology', { kg: KG_PER_MEAL, co2: CO2_PER_KG_FOOD })}</p>
         </div>
       </section>
+
+      <VineDivider className="mt-6" />
 
       {/* Sponsors */}
       <section className="mx-auto max-w-7xl px-4 py-14 text-center sm:px-6">
@@ -214,6 +221,8 @@ export default function Landing() {
         </div>
       </section>
 
+      <VineDivider />
+
       {/* FAQ */}
       <section id="faq" className="mx-auto max-w-3xl scroll-mt-20 px-4 py-14 sm:px-6">
         <h2 className="text-center text-3xl font-bold">
@@ -222,7 +231,7 @@ export default function Landing() {
         <div className="mt-8 space-y-3">
           {([1, 2, 3, 4, 5, 6] as const).map((n) => (
             <details key={n} className="group card overflow-hidden p-0 [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-semibold text-navy">
+              <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-semibold text-verd">
                 {t(`faq.q${n}` as MessageKey)}
                 <span className="text-gold-dark transition group-open:rotate-45" aria-hidden>
                   +
@@ -236,8 +245,11 @@ export default function Landing() {
 
       {/* CTA */}
       <section className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl border border-gold/50 bg-gradient-to-br from-navy-700 via-navy to-navy-950 p-10 text-center">
-          <div className="absolute -top-20 -right-20 size-60 rounded-full bg-crimson/25 blur-3xl" aria-hidden />
+        <div className="relative overflow-hidden rounded-[1.75rem] border border-gold/50 bg-gradient-to-br from-verd-600 via-verd to-vine-700 p-10 text-center shadow-2xl">
+          <div className="absolute -top-20 -right-20 size-60 rounded-full bg-vine-400/30 blur-3xl" aria-hidden />
+          <div className="absolute -bottom-24 -left-16 size-60 rounded-full bg-leaf/20 blur-3xl" aria-hidden />
+          <VineFlourish className="absolute -top-6 left-2 hidden h-72 w-auto opacity-40 md:block" />
+          <VineFlourish flip className="absolute -top-6 right-2 hidden h-72 w-auto opacity-40 md:block" />
           <h2 className="relative text-3xl font-bold sm:text-4xl">
             <span className="gold-text">{t('cta.title')}</span>
           </h2>

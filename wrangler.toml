@@ -8,6 +8,12 @@ compatibility_date = "2025-09-01"
 routes = [{ pattern = "ss.siak.me", custom_domain = true }]
 workers_dev = true
 
+# Local `wrangler dev` must not rewrite request URLs to the production domain
+# (otherwise localhost-only dev login and local OAuth callbacks break).
+[dev]
+port = 8787
+host = "localhost:8787"
+
 # Built frontend (npm run build -> web/dist). Unknown paths fall back to index.html
 # so client-side routes work; /api/* always goes to the Worker first.
 [assets]

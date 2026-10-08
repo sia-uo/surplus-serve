@@ -1,31 +1,18 @@
 // Pure business rules for listing lifecycle, expiry and no-shows (unit-tested).
+import { LISTING_TIME_MESSAGES, listingTimeError, type ListingTimes } from '../../../shared/listingTimes';
 import {
-  MAX_SAFE_HOURS,
   NO_SHOW_GRACE_MS,
   NO_SHOW_SUSPEND_THRESHOLD,
   URGENT_WINDOW_MS,
 } from '../../../shared/constants';
 import type { ClaimStatus, ListingStatus } from '../../../shared/types';
 
-export interface ListingTimes {
-  cookedAt: number;
-  safeUntil: number;
-  pickupStart: number;
-  pickupEnd: number;
-}
+export type { ListingTimes } from '../../../shared/listingTimes';
 
-/** Validates listing timing; returns an error message or null. */
+/** Validates listing timing; returns an English error message or null. */
 export function validateListingTimes(t: ListingTimes, now: number): string | null {
-  if (t.cookedAt > now + 5 * 60_000) return 'Cooked-at time cannot be in the future';
-  if (t.safeUntil <= now) return 'Safe-until time must be in the future';
-  if (t.safeUntil <= t.cookedAt) return 'Safe-until must be after cooked-at';
-  if (t.safeUntil - t.cookedAt > MAX_SAFE_HOURS * 3600_000)
-    return `Food must be safe for at most ${MAX_SAFE_HOURS} hours after cooking`;
-  if (t.pickupEnd <= t.pickupStart) return 'Pickup window end must be after its start';
-  if (t.pickupEnd <= now) return 'Pickup window must end in the future';
-  if (t.pickupEnd > t.safeUntil) return 'Pickup window must end before the safe-until time';
-  if (t.pickupStart < t.cookedAt) return 'Pickup cannot start before the food was cooked';
-  return null;
+  const code = listingTimeError(t, now);
+  return code ? LISTING_TIME_MESSAGES[code] : null;
 }
 
 export function isExpired(safeUntil: number, now: number): boolean {

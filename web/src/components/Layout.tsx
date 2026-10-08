@@ -74,7 +74,7 @@ function Header() {
   useEffect(() => setOpen(false), [location.pathname, location.hash]);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    cx('rounded-full px-3 py-2 text-sm font-medium transition', isActive ? 'bg-gold/15 text-gold' : 'text-ivory/85 hover:text-gold');
+    cx('rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition', isActive ? 'bg-gold/15 text-gold' : 'text-ivory/85 hover:text-gold');
 
   const authButtons = user ? (
     <button
@@ -93,23 +93,23 @@ function Header() {
   );
 
   return (
-    <header className="no-print sticky top-0 z-[900] border-b border-gold/25 bg-navy/85 backdrop-blur-md">
+    <header className="no-print sticky top-0 whitespace-nowrap z-[900] border-b border-gold/25 bg-navy/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
         <Logo to={user?.role ? homeFor(user.role) : '/'} />
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-1 xl:flex" aria-label="Main">
           {items.map((i) => (
             <NavLink key={i.to} to={i.to} end={i.end} className={i.to.includes('#') ? linkClass({ isActive: false }) : linkClass}>
               {t(i.key)}
             </NavLink>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           <InstallButton className="min-h-10 py-1.5" />
           <LanguageSwitcher />
           {authButtons}
         </div>
         <button
-          className="btn btn-ghost-dark -mr-2 lg:hidden"
+          className="btn btn-ghost-dark -mr-2 xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={t('nav.menu')}
@@ -121,7 +121,7 @@ function Header() {
         </button>
       </div>
       {open && (
-        <div id="mobile-nav" className="animate-rise border-t border-gold/20 bg-navy px-4 pt-2 pb-5 lg:hidden">
+        <div id="mobile-nav" className="animate-rise border-t border-gold/20 bg-navy px-4 pt-2 pb-5 xl:hidden">
           <nav className="flex flex-col gap-1" aria-label="Main">
             {items.map((i) => (
               <NavLink key={i.to} to={i.to} end={i.end} className={i.to.includes('#') ? linkClass({ isActive: false }) : linkClass}>

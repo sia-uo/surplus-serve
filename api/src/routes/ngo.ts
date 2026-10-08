@@ -1,9 +1,10 @@
 import { Hono } from 'hono';
 import type { AppEnv } from '../env';
+import { emailAdmins, templates } from '../lib/email';
 import { CLAIM_SELECT_FOR_NGO, toClaim, toNgo } from '../lib/mappers';
 import { ngoProfileSchema, ratingSchema } from '../lib/schemas';
 import { requireAuth, requireRole } from '../lib/session';
-import { fail, normaliseCity, now, pageParams, paginate, parse, readJson } from '../lib/util';
+import { appUrl, fail, normaliseCity, now, pageParams, paginate, parse, readJson } from '../lib/util';
 import { cancelClaim } from '../services/listings';
 
 export const ngo = new Hono<AppEnv>();
@@ -21,6 +22,7 @@ ngo.put('/profile', async (c) => {
   const t = now();
   const city = normaliseCity(p.city);
   const existing = await c.env.DB.prepare('SELECT * FROM ngos WHERE user_id = ?').bind(uid).first<Record<string, any>>();
+  let needsReview = !existing;
   if (!existing) {
     await c.env.DB.prepare(
       `INSERT INTO ngos (user_id, name, address, city, lat, lng, phone, registration_number, certificate_key, alerts_enabled, alert_radius_km, created_at, updated_at)
@@ -34,6 +36,7 @@ ngo.put('/profile', async (c) => {
       existing.name !== p.name ||
       (p.certificateKey ?? null) !== existing.certificate_key ||
       existing.verification === 'rejected';
+    needsReview = reverify && existing.verification !== 'pending';
     await c.env.DB.prepare(
       `UPDATE ngos SET name = ?, address = ?, city = ?, lat = ?, lng = ?, phone = ?, registration_number = ?, certificate_key = ?,
          alerts_enabled = ?, alert_radius_km = ?,
@@ -58,6 +61,20 @@ ngo.put('/profile', async (c) => {
         uid,
       )
       .run();
+  }
+  if (needsReview) {
+    const user = c.get('user');
+    const base = appUrl(c.env, c.req.raw);
+    const t = templates.adminNotice(c.env, base, 'NGO awaiting verification', {
+      NGO: p.name,
+      City: p.city,
+      'Registration no.': p.registrationNumber,
+      Certificate: p.certificateKey ? 'Uploaded' : 'Not uploaded yet',
+      Contact: `${user.name} <${user.email}>`,
+      Phone: p.phone,
+      Review: `${base}/admin/verifications?type=ngo`,
+    });
+    await emailAdmins(c.env, t.subject, t.html);
   }
   const r = await c.env.DB.prepare('SELECT * FROM ngos WHERE user_id = ?').bind(uid).first();
   return c.json({ profile: toNgo(r!) });

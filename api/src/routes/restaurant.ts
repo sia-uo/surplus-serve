@@ -35,6 +35,7 @@ restaurant.put('/profile', async (c) => {
   const t = now();
   const existing = await getProfile(c, user.id);
   const city = normaliseCity(p.city);
+  let needsReview = !existing;
   if (!existing) {
     await c.env.DB.prepare(
       `INSERT INTO restaurants (user_id, name, address, city, lat, lng, phone, fssai_number, upi_id, hide_name, created_at, updated_at)
@@ -45,6 +46,7 @@ restaurant.put('/profile', async (c) => {
   } else {
     // Changing the licence number or business name requires re-verification.
     const reverify = existing.fssai_number !== p.fssaiNumber || existing.name !== p.name || existing.verification === 'rejected';
+    needsReview = reverify && existing.verification !== 'pending';
     await c.env.DB.prepare(
       `UPDATE restaurants SET name = ?, address = ?, city = ?, lat = ?, lng = ?, phone = ?, fssai_number = ?, upi_id = ?, hide_name = ?,
          verification = CASE WHEN ? THEN 'pending' ELSE verification END,
@@ -53,6 +55,18 @@ restaurant.put('/profile', async (c) => {
     )
       .bind(p.name, p.address, city, p.lat, p.lng, p.phone, p.fssaiNumber, p.upiId || null, p.hideName ? 1 : 0, reverify ? 1 : 0, reverify ? 1 : 0, t, user.id)
       .run();
+  }
+  if (needsReview) {
+    const base = appUrl(c.env, c.req.raw);
+    const t = templates.adminNotice(c.env, base, 'Restaurant awaiting verification', {
+      Restaurant: p.name,
+      City: p.city,
+      'FSSAI licence': p.fssaiNumber,
+      Contact: `${user.name} <${user.email}>`,
+      Phone: p.phone,
+      Review: `${base}/admin/verifications?type=restaurant`,
+    });
+    await emailAdmins(c.env, t.subject, t.html);
   }
   const r = await getProfile(c, user.id);
   return c.json({ profile: toRestaurant(r!) });

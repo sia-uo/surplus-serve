@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { Allergen, FoodType } from '../../../../shared/constants';
+import { listingTimeError } from '../../../../shared/listingTimes';
 import { VerificationBanner } from '../../components/Guards';
 import { Container } from '../../components/Layout';
 import { AllergenPicker, checklistComplete, emptyChecklist, FoodTypePicker, SafetyChecklist } from '../../components/ListingFields';
 import { Alert, Button, Card, Field, PageHeader } from '../../components/ui';
-import { useI18n } from '../../i18n';
+import { useI18n, type MessageKey } from '../../i18n';
 import { api } from '../../lib/api';
 import { useAuth } from '../../lib/auth';
 import { fromLocalInput, toLocalInput } from '../../lib/format';
@@ -59,10 +60,31 @@ export default function NewListing() {
     }
   }
 
+  /** Why posting is blocked right now, if it is — shown instead of silently disabling the button. */
+  function blocker(): string | null {
+    if (!restaurant) return t('newListing.noProfile');
+    if (restaurant.verification === 'pending') return t('newListing.notApproved');
+    if (restaurant.verification === 'rejected') return t('newListing.rejected');
+    if (!checklistComplete(checklist)) return t('newListing.checkAll');
+    const timeError = listingTimeError(
+      {
+        cookedAt: fromLocalInput(form.cookedAt),
+        safeUntil: fromLocalInput(form.safeUntil),
+        pickupStart: fromLocalInput(form.pickupStart),
+        pickupEnd: fromLocalInput(form.pickupEnd),
+      },
+      Date.now(),
+    );
+    if (timeError) return t(`time.${timeError}` as MessageKey);
+    if (form.packagingCost > cap) return t('newListing.packagingHint', { cap });
+    return null;
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    setError(null);
-    if (!checklistComplete(checklist)) return setError(t('newListing.checkAll'));
+    const reason = blocker();
+    setError(reason);
+    if (reason) return;
     setBusy(true);
     try {
       await api.post('/api/restaurant/listings', {
@@ -82,7 +104,6 @@ export default function NewListing() {
       navigate('/restaurant', { state: { posted: true } });
     } catch (err) {
       setError((err as Error).message);
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     } finally {
       setBusy(false);
     }
@@ -150,9 +171,10 @@ export default function NewListing() {
 
           <SafetyChecklist value={checklist} onChange={setChecklist} />
 
+          {!approved && !error && <Alert tone="warning">⏳ {restaurant?.verification === 'rejected' ? t('newListing.rejected') : restaurant ? t('newListing.notApproved') : t('newListing.noProfile')}</Alert>}
           {error && <Alert tone="error">{error}</Alert>}
           <div className="flex flex-wrap items-center gap-4">
-            <Button type="submit" loading={busy} disabled={!approved || uploading || !checklistComplete(checklist)} className="px-8">
+            <Button type="submit" loading={busy} disabled={uploading} className="px-8">
               {busy ? t('newListing.posting') : t('newListing.post')}
             </Button>
             <Link to="/restaurant/recurring" className="text-sm text-navy underline">

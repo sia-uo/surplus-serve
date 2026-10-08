@@ -3,6 +3,11 @@ name = "surplus-serve"
 main = "api/src/index.ts"
 compatibility_date = "2025-09-01"
 
+# Production domain. Cloudflare creates the DNS record and certificate on deploy
+# (the siak.me zone must be on this Cloudflare account). workers.dev stays on as a fallback.
+routes = [{ pattern = "ss.siak.me", custom_domain = true }]
+workers_dev = true
+
 # Built frontend (npm run build -> web/dist). Unknown paths fall back to index.html
 # so client-side routes work; /api/* always goes to the Worker first.
 [assets]
@@ -12,13 +17,12 @@ not_found_handling = "single-page-application"
 run_worker_first = ["/api/*"]
 
 # ---------------------------------------------------------------------------
-# D1 database. Create it with:  npx wrangler d1 create surplus-serve
-# then paste the printed database_id below.
+# D1 database (created in APAC with: npx wrangler d1 create surplus-serve)
 # ---------------------------------------------------------------------------
 [[d1_databases]]
 binding = "DB"
 database_name = "surplus-serve"
-database_id = "PASTE_YOUR_D1_DATABASE_ID_HERE" # <-- REPLACE THIS
+database_id = "e10f05d9-0132-499c-bad3-f200e270e1fa"
 migrations_dir = "migrations"
 
 # R2 bucket for NGO certificates, food photos and sponsor logos.
@@ -40,7 +44,7 @@ enabled = true
 [vars]
 APP_NAME = "SurplusServe"
 # Public URL used in emails sent from cron jobs (no trailing slash).
-APP_URL = "https://surplus-serve.YOUR-SUBDOMAIN.workers.dev"
+APP_URL = "https://ss.siak.me"
 # Hard cap on packaging cost per serving, in rupees.
 PACKAGING_CAP = "15"
 # Sender for Resend. Use onboarding@resend.dev until you verify your own domain.

@@ -103,50 +103,44 @@ wrangler.toml Worker config: D1, R2, assets, crons, vars
 
 You need a Cloudflare account (free plan), a Google account and a Resend account.
 
-### 1. Create the D1 database and R2 bucket
+### 1. D1 database and R2 bucket (done)
 
-From a terminal in the repo (run `npx wrangler login` first), or in the dashboard:
+Already created in the APAC region, with the schema migrated:
 
-```bash
-npx wrangler d1 create surplus-serve
-npx wrangler r2 bucket create surplus-serve-uploads
-```
+- D1 `surplus-serve`, id `e10f05d9-0132-499c-bad3-f200e270e1fa` (already in `wrangler.toml`)
+- R2 `surplus-serve-uploads`
 
-Dashboard alternative: **Storage & Databases → D1 → Create database** named `surplus-serve`, and **R2 → Create bucket** named `surplus-serve-uploads`. (R2 asks you to enable it once; the free tier has no charges within its limits.)
+To recreate them on another account: `npx wrangler d1 create surplus-serve` and `npx wrangler r2 bucket create surplus-serve-uploads`, then paste the new `database_id` into `wrangler.toml`.
 
-### 2. Paste the database_id
+### 2. Domain and vars
 
-Copy the `database_id` printed by the command (or shown on the D1 database page) into `wrangler.toml`:
+The app is served at **https://ss.siak.me** (`routes` in `wrangler.toml`, `custom_domain = true`). Cloudflare creates the DNS record and TLS certificate on the first deploy, because `siak.me` is a zone on the same account. Don't create a DNS record for `ss` yourself, or the custom domain won't attach.
 
-```toml
-database_id = "PASTE_YOUR_D1_DATABASE_ID_HERE" # <-- REPLACE THIS
-```
-
-Commit and push the change. The ID is not a secret.
-
-Also set these non-secret `[vars]` in `wrangler.toml`:
-- `APP_URL`: your Worker URL, e.g. `https://surplus-serve.<your-subdomain>.workers.dev` (used in links inside emails sent by the cron job).
+Non-secret `[vars]` in `wrangler.toml`:
+- `APP_URL = "https://ss.siak.me"`: used in links inside emails sent by the cron job.
 - `CONTACT_EMAIL`: a real email for OpenStreetMap's Nominatim usage policy. Leave it empty rather than using a placeholder; placeholders get blocked.
-- `EMAIL_FROM`: keep `onboarding@resend.dev` until you verify a domain in Resend (see step 4).
+- `EMAIL_FROM`: keep `onboarding@resend.dev` until you verify `siak.me` in Resend (see step 4).
 
 ### 3. Google OAuth
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com/) → create or select a project → **APIs & Services → OAuth consent screen**. Choose External, fill in the app name (SurplusServe), support email and authorised domain (`workers.dev` or your own), and add the scopes `openid`, `email` and `profile`. Publish the app, or add test users while testing.
+1. Go to [Google Cloud Console](https://console.cloud.google.com/) → create or select a project → **APIs & Services → OAuth consent screen** (Google Auth Platform → Branding). Choose External, set the app name (SurplusServe) and support email, add **`siak.me`** under authorised domains, and add the scopes `openid`, `email` and `profile`. Publish the app, or add test users while testing.
 2. **Credentials → Create credentials → OAuth client ID → Web application.**
 3. **Authorised JavaScript origins:**
-   - `https://surplus-serve.<your-subdomain>.workers.dev`
-   - `http://localhost:8787` and `http://localhost:5173` (local dev)
+   - `https://ss.siak.me`
+   - `http://localhost:8787`
+   - `http://localhost:5173`
 4. **Authorised redirect URIs:**
-   - `https://surplus-serve.<your-subdomain>.workers.dev/api/auth/google/callback`
+   - `https://ss.siak.me/api/auth/google/callback`
    - `http://localhost:8787/api/auth/google/callback`
    - `http://localhost:5173/api/auth/google/callback`
-   - If you add a custom domain later, add `https://<your-domain>/api/auth/google/callback` too.
 5. Copy the **Client ID** and **Client secret** for step 6.
+
+Sign in at `https://ss.siak.me`. The workers.dev address also stays live as a fallback, but Google sign-in only works there if you add its callback URL too.
 
 ### 4. Resend
 
 1. Sign up at [resend.com](https://resend.com) → **API Keys → Create API key** (Sending access). Copy it for step 6.
-2. Without a verified domain, Resend only delivers `onboarding@resend.dev` mail to **your own account email**. To email real users, go to **Domains → Add domain**, add the DNS records, and then set `EMAIL_FROM = "SurplusServe <noreply@yourdomain.in>"` in `wrangler.toml`.
+2. Without a verified domain, Resend only delivers `onboarding@resend.dev` mail to **your own account email**. To email real users, go to **Domains → Add domain**, add the DNS records, and then set `EMAIL_FROM = "SurplusServe <noreply@siak.me>"` in `wrangler.toml`.
 3. The free plan allows 100 emails/day, which matches `EMAIL_DAILY_LIMIT = "100"`. Raise it only if your plan allows more.
 
 ### 5. Connect the GitHub repo (Workers Builds)
@@ -178,7 +172,7 @@ Secrets are never stored in the repo. Redeploy (or push a commit) after adding t
 
 ### 7. First login
 
-Open the Worker URL and sign in with an email listed in `ADMIN_EMAILS`. You land in **Admin**. Restaurants and NGOs who sign up appear under **Admin → Verifications**.
+Open https://ss.siak.me and sign in with an email listed in `ADMIN_EMAILS`. You land in **Admin**. Restaurants and NGOs who sign up appear under **Admin → Verifications**.
 
 Cron triggers (`*/10 * * * *` and `30 18 * * *` = midnight IST) are registered automatically from `wrangler.toml`.
 

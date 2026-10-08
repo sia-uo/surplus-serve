@@ -1,0 +1,16 @@
+# Copy to .dev.vars for local development (`wrangler dev` reads it).
+# .dev.vars is git-ignored. NEVER commit real secrets.
+
+GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+# Leave empty locally to log emails to the console instead of sending.
+RESEND_API_KEY=
+# Any long random string (e.g. `node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"`)
+JWT_SECRET=change-me-to-a-long-random-string
+# Comma-separated list of admin Google accounts.
+ADMIN_EMAILS=you@example.com
+
+# Local only: enables POST /api/auth/dev-login (only works on localhost)
+# so you can sign in as seeded demo accounts without Google.
+DEV_LOGIN=true
+APP_URL=http://localhost:5173

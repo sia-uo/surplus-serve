@@ -1,0 +1,52 @@
+# SurplusServe — one Worker serves the Hono API (/api/*) and the built React PWA.
+name = "surplus-serve"
+main = "api/src/index.ts"
+compatibility_date = "2025-09-01"
+
+# Built frontend (npm run build -> web/dist). Unknown paths fall back to index.html
+# so client-side routes work; /api/* always goes to the Worker first.
+[assets]
+directory = "./web/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+# ---------------------------------------------------------------------------
+# D1 database. Create it with:  npx wrangler d1 create surplus-serve
+# then paste the printed database_id below.
+# ---------------------------------------------------------------------------
+[[d1_databases]]
+binding = "DB"
+database_name = "surplus-serve"
+database_id = "PASTE_YOUR_D1_DATABASE_ID_HERE" # <-- REPLACE THIS
+migrations_dir = "migrations"
+
+# R2 bucket for NGO certificates, food photos and sponsor logos.
+# Create it with:  npx wrangler r2 bucket create surplus-serve-uploads
+[[r2_buckets]]
+binding = "UPLOADS"
+bucket_name = "surplus-serve-uploads"
+
+# Every 10 min: expire listings, record no-shows, post recurring listings,
+# send batched new-listing alerts. Daily (00:00 IST): housekeeping.
+[triggers]
+crons = ["*/10 * * * *", "30 18 * * *"]
+
+[observability]
+enabled = true
+
+# Non-secret configuration. Secrets (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
+# RESEND_API_KEY, JWT_SECRET, ADMIN_EMAILS) are set in the Cloudflare dashboard.
+[vars]
+APP_NAME = "SurplusServe"
+# Public URL used in emails sent from cron jobs (no trailing slash).
+APP_URL = "https://surplus-serve.YOUR-SUBDOMAIN.workers.dev"
+# Hard cap on packaging cost per serving, in rupees.
+PACKAGING_CAP = "15"
+# Sender for Resend. Use onboarding@resend.dev until you verify your own domain.
+EMAIL_FROM = "SurplusServe <onboarding@resend.dev>"
+# Resend free plan allows 100 emails/day; alerts stop early to keep a reserve.
+EMAIL_DAILY_LIMIT = "100"
+# Your real contact email, sent to OpenStreetMap Nominatim per its usage policy
+# (leave empty rather than using a placeholder — placeholders get blocked).
+CONTACT_EMAIL = ""

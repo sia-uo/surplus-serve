@@ -42,10 +42,10 @@ export default function RestaurantImpact() {
           {!restaurant?.premium && (
             <div className="card-dark mt-8 flex flex-wrap items-center justify-between gap-4 p-6">
               <div>
-                <p className="font-serif text-xl font-bold text-gold">♛ {t('premium.badge')}</p>
+                <p className="font-serif text-xl font-bold text-leaf">🌿 {t('premium.badge')}</p>
                 <p className="text-sm text-ivory/75">{t('premium.f1')} · {t('premium.f2')}</p>
               </div>
-              <LinkButton to="/restaurant/premium" variant="gold">
+              <LinkButton to="/restaurant/premium" variant="leaf">
                 {t('nav.premium')} →
               </LinkButton>
             </div>

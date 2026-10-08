@@ -13,7 +13,7 @@ export function FoodTypePicker({ value, onChange }: { value: FoodType; onChange:
           role="radio"
           aria-checked={value === f}
           onClick={() => onChange(f)}
-          className={cx('chip', value === f ? 'border-verd bg-verd text-gold' : 'border-ink/20 bg-white text-ink hover:border-gold-dark')}
+          className={cx('chip', value === f ? 'border-verd bg-verd text-leaf' : 'border-ink/20 bg-white text-ink hover:border-leaf-dark')}
         >
           {f === 'veg' ? '🟢' : f === 'nonveg' ? '🔺' : '✳️'} {t(`food.${f}` as MessageKey)}
         </button>

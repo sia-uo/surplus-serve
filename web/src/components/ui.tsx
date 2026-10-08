@@ -5,7 +5,7 @@ import { useI18n } from '../i18n';
 const cx = (...c: (string | false | null | undefined)[]) => c.filter(Boolean).join(' ');
 export { cx };
 
-type Variant = 'primary' | 'gold' | 'gold-solid' | 'ghost' | 'ghost-dark' | 'outline';
+type Variant = 'primary' | 'leaf' | 'leaf-solid' | 'ghost' | 'ghost-dark' | 'outline';
 
 export function Button({
   variant = 'primary',
@@ -35,7 +35,7 @@ export function Spinner({ small, className }: { small?: boolean; className?: str
 export function Loading({ label, dark }: { label?: string; dark?: boolean }) {
   const { t } = useI18n();
   return (
-    <div className={cx('flex flex-col items-center justify-center gap-3 py-16', dark ? 'text-gold' : 'text-gold-dark')} aria-live="polite">
+    <div className={cx('flex flex-col items-center justify-center gap-3 py-16', dark ? 'text-leaf' : 'text-leaf-dark')} aria-live="polite">
       <Spinner />
       <span className="text-sm opacity-80">{label ?? t('common.loading')}</span>
     </div>
@@ -63,7 +63,7 @@ export function ErrorState({ message, onRetry, dark }: { message?: string | null
       <p className="font-semibold">{t('common.error')}</p>
       {message && <p className="mt-1 text-sm opacity-80">{message}</p>}
       {onRetry && (
-        <Button variant={dark ? 'gold' : 'outline'} className="mt-4" onClick={onRetry}>
+        <Button variant={dark ? 'leaf' : 'outline'} className="mt-4" onClick={onRetry}>
           {t('common.retry')}
         </Button>
       )}
@@ -73,7 +73,7 @@ export function ErrorState({ message, onRetry, dark }: { message?: string | null
 
 export function EmptyState({ title, body, action, icon = '🍽️', dark }: { title: string; body?: string; action?: ReactNode; icon?: string; dark?: boolean }) {
   return (
-    <div className={cx('rounded-2xl border border-dashed p-10 text-center', dark ? 'border-gold/40 text-ivory' : 'border-ink/20 bg-white/60 text-ink')}>
+    <div className={cx('rounded-2xl border border-dashed p-10 text-center', dark ? 'border-leaf/40 text-ivory' : 'border-ink/20 bg-white/60 text-ink')}>
       <div className="text-4xl" aria-hidden>
         {icon}
       </div>
@@ -88,7 +88,7 @@ export function Alert({ tone = 'info', children, className }: { tone?: 'info' | 
   const tones = {
     info: 'border-verd/20 bg-verd/5 text-ink',
     success: 'border-verd-600/30 bg-leaf/15 text-verd-700',
-    warning: 'border-gold-dark/40 bg-gold/10 text-ink',
+    warning: 'border-leaf-dark/40 bg-leaf/10 text-ink',
     error: 'border-vine/40 bg-vine/5 text-vine-700',
   };
   return (
@@ -114,14 +114,14 @@ export function Field({ label, hint, error, children, optional }: { label: strin
   );
 }
 
-export function Badge({ tone = 'verd', children, className }: { tone?: 'verd' | 'gold' | 'red' | 'green' | 'gray' | 'outline'; children: ReactNode; className?: string }) {
+export function Badge({ tone = 'verd', children, className }: { tone?: 'verd' | 'leaf' | 'red' | 'green' | 'gray' | 'outline'; children: ReactNode; className?: string }) {
   const tones = {
     verd: 'bg-verd text-ivory',
-    gold: 'bg-gradient-to-r from-gold-light to-gold text-verd',
+    leaf: 'bg-gradient-to-r from-leaf-light to-leaf text-verd',
     red: 'bg-vine text-white',
     green: 'bg-verd-600 text-white',
     gray: 'bg-ink/10 text-ink',
-    outline: 'border border-gold-dark/50 text-gold-dark',
+    outline: 'border border-leaf-dark/50 text-leaf-dark',
   };
   return <span className={cx('badge', tones[tone], className)}>{children}</span>;
 }
@@ -135,8 +135,8 @@ export function PageHeader({ eyebrow, title, subtitle, actions }: { eyebrow?: st
     <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="animate-rise">
         {eyebrow && <p className="heading-eyebrow mb-2">{eyebrow}</p>}
-        <h1 className="gold-text text-3xl font-bold sm:text-4xl">{title}</h1>
-        <div className="mt-3 h-px w-24 bg-gradient-to-r from-gold via-leaf/70 to-transparent" aria-hidden />
+        <h1 className="leaf-text text-3xl font-bold sm:text-4xl">{title}</h1>
+        <div className="mt-3 h-px w-24 bg-gradient-to-r from-leaf via-leaf/70 to-transparent" aria-hidden />
         {subtitle && <p className="mt-2 max-w-2xl text-ivory/75">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
@@ -146,14 +146,14 @@ export function PageHeader({ eyebrow, title, subtitle, actions }: { eyebrow?: st
 
 export function StatCard({ label, value, icon, dark }: { label: string; value: ReactNode; icon?: string; dark?: boolean }) {
   return (
-    <div className={cx('relative overflow-hidden rounded-2xl border p-5', dark ? 'border-gold/40 bg-verd-800/70' : 'card')}>
-      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent" />
+    <div className={cx('relative overflow-hidden rounded-2xl border p-5', dark ? 'border-leaf/40 bg-verd-800/70' : 'card')}>
+      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-leaf to-transparent" />
       {icon && (
         <div className="mb-2 text-2xl" aria-hidden>
           {icon}
         </div>
       )}
-      <div className={cx('font-serif text-3xl font-bold', dark ? 'gold-text' : 'text-verd')}>{value}</div>
+      <div className={cx('font-serif text-3xl font-bold', dark ? 'leaf-text' : 'text-verd')}>{value}</div>
       <div className={cx('mt-1 text-sm', dark ? 'text-ivory/75' : 'text-ink/70')}>{label}</div>
     </div>
   );
@@ -172,11 +172,11 @@ export function Tabs<T extends string>({ value, onChange, tabs, dark }: { value:
             onClick={() => onChange(tab.value)}
             className={cx(
               'chip shrink-0',
-              active ? 'border-gold bg-gold text-verd' : dark ? 'border-gold/40 text-ivory hover:border-gold' : 'border-ink/20 bg-white text-ink hover:border-gold-dark',
+              active ? 'border-leaf bg-leaf text-verd' : dark ? 'border-leaf/40 text-ivory hover:border-leaf' : 'border-ink/20 bg-white text-ink hover:border-leaf-dark',
             )}
           >
             {tab.label}
-            {tab.count !== undefined && <span className={cx('ml-2 rounded-full px-1.5 text-xs', active ? 'bg-verd text-gold' : 'bg-gold/20')}>{tab.count}</span>}
+            {tab.count !== undefined && <span className={cx('ml-2 rounded-full px-1.5 text-xs', active ? 'bg-verd text-leaf' : 'bg-leaf/20')}>{tab.count}</span>}
           </button>
         );
       })}
@@ -229,7 +229,7 @@ export function LoadMore({ hasMore, loading, onClick, dark }: { hasMore: boolean
   if (!hasMore) return null;
   return (
     <div className="mt-6 flex justify-center">
-      <Button variant={dark ? 'gold' : 'outline'} loading={loading} onClick={onClick}>
+      <Button variant={dark ? 'leaf' : 'outline'} loading={loading} onClick={onClick}>
         {t('common.next')} →
       </Button>
     </div>
@@ -249,7 +249,7 @@ export function Stars({ value, onChange, size = 'text-2xl' }: { value: number; o
           aria-checked={onChange ? value === n : undefined}
           aria-label={t('rating.stars', { n })}
           onClick={() => onChange?.(n)}
-          className={cx(size, 'leading-none transition', n <= value ? 'text-gold' : 'text-ink/20', onChange && 'hover:scale-110')}
+          className={cx(size, 'leading-none transition', n <= value ? 'text-leaf' : 'text-ink/20', onChange && 'hover:scale-110')}
         >
           ★
         </button>

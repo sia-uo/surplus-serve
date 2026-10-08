@@ -40,7 +40,7 @@ export default function AdminAudit() {
 
   return (
     <div>
-      <AdminTitle actions={<Button variant="gold" loading={checking} onClick={verify}>🔗 {t('admin.verifyChain')}</Button>}>{t('admin.audit')}</AdminTitle>
+      <AdminTitle actions={<Button variant="leaf" loading={checking} onClick={verify}>🔗 {t('admin.verifyChain')}</Button>}>{t('admin.audit')}</AdminTitle>
       <p className="mb-4 max-w-3xl text-sm text-ivory/75">{t('admin.auditIntro')}</p>
       {check && (
         <Alert tone={check.ok ? 'success' : 'error'} className="mb-4">

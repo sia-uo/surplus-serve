@@ -15,7 +15,7 @@ function LanguageSwitcher({ className }: { className?: string }) {
   return (
     <label className={cx('relative inline-flex items-center', className)}>
       <span className="sr-only">{t('lang.label')}</span>
-      <svg aria-hidden viewBox="0 0 24 24" className="pointer-events-none absolute left-3 size-4 text-gold" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <svg aria-hidden viewBox="0 0 24 24" className="pointer-events-none absolute left-3 size-4 text-leaf" fill="none" stroke="currentColor" strokeWidth="1.8">
         <circle cx="12" cy="12" r="9" />
         <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" />
       </svg>
@@ -26,7 +26,7 @@ function LanguageSwitcher({ className }: { className?: string }) {
           setLocale(l);
           if (user) void api.patch('/api/me/locale', { locale: l }).catch(() => undefined);
         }}
-        className="min-h-10 cursor-pointer appearance-none rounded-full border border-gold/50 bg-verd-800 py-1.5 pr-4 pl-8 text-sm text-ivory hover:border-gold focus:outline-none"
+        className="min-h-10 cursor-pointer appearance-none rounded-full border border-leaf/50 bg-verd-800 py-1.5 pr-4 pl-8 text-sm text-ivory hover:border-leaf focus:outline-none"
       >
         {LOCALES.map((l) => (
           <option key={l} value={l}>
@@ -74,7 +74,7 @@ function Header() {
   useEffect(() => setOpen(false), [location.pathname, location.hash]);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    cx('rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition', isActive ? 'bg-gold/15 text-gold' : 'text-ivory/85 hover:text-gold');
+    cx('rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition', isActive ? 'bg-leaf/15 text-leaf' : 'text-ivory/85 hover:text-leaf');
 
   const authButtons = user ? (
     <button
@@ -93,7 +93,7 @@ function Header() {
   );
 
   return (
-    <header className="no-print sticky top-0 whitespace-nowrap z-[900] bg-verd/85 shadow-[0_1px_0_rgb(207_166_74/0.35),0_10px_30px_-20px_rgb(0_0_0/0.8)] backdrop-blur-md">
+    <header className="no-print sticky top-0 whitespace-nowrap z-[900] bg-verd/85 shadow-[0_1px_0_rgb(143_191_108/0.3),0_10px_30px_-20px_rgb(0_0_0/0.8)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
         <Logo to={user?.role ? homeFor(user.role) : '/'} />
         <nav className="hidden items-center gap-1 xl:flex" aria-label="Main">
@@ -115,13 +115,13 @@ function Header() {
           aria-label={t('nav.menu')}
           onClick={() => setOpen((o) => !o)}
         >
-          <span aria-hidden className="text-xl text-gold">
+          <span aria-hidden className="text-xl text-leaf">
             {open ? '✕' : '☰'}
           </span>
         </button>
       </div>
       {open && (
-        <div id="mobile-nav" className="animate-rise border-t border-gold/20 bg-verd px-4 pt-2 pb-5 xl:hidden">
+        <div id="mobile-nav" className="animate-rise border-t border-leaf/20 bg-verd px-4 pt-2 pb-5 xl:hidden">
           <nav className="flex flex-col gap-1" aria-label="Main">
             {items.map((i) => (
               <NavLink key={i.to} to={i.to} end={i.end} className={i.to.includes('#') ? linkClass({ isActive: false }) : linkClass}>
@@ -129,7 +129,7 @@ function Header() {
               </NavLink>
             ))}
           </nav>
-          <div className="gold-rule my-4" />
+          <div className="leaf-rule my-4" />
           <div className="flex flex-wrap items-center gap-2">
             <LanguageSwitcher />
             <InstallButton />
@@ -144,22 +144,22 @@ function Header() {
 function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="no-print relative mt-20 border-t border-gold/25 bg-gradient-to-b from-verd-950/40 to-verd-950/90">
+    <footer className="no-print relative mt-20 border-t border-leaf/25 bg-gradient-to-b from-verd-950/40 to-verd-950/90">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-3">
         <div>
           <Logo />
           <p className="mt-3 max-w-xs text-sm text-ivory/70">{t('footer.tagline')}</p>
         </div>
         <nav className="grid grid-cols-2 gap-2 text-sm" aria-label="Footer">
-          <Link className="text-ivory/80 hover:text-gold" to="/impact">{t('nav.impact')}</Link>
-          <Link className="text-ivory/80 hover:text-gold" to="/sponsor-us">{t('nav.sponsorUs')}</Link>
-          <Link className="text-ivory/80 hover:text-gold" to="/terms">{t('footer.terms')}</Link>
-          <Link className="text-ivory/80 hover:text-gold" to="/privacy">{t('footer.privacy')}</Link>
-          <Link className="text-ivory/80 hover:text-gold" to="/disclaimer">{t('footer.disclaimer')}</Link>
-          <a className="text-ivory/80 hover:text-gold" href="https://github.com/sia-uo/surplus-serve" target="_blank" rel="noreferrer">GitHub</a>
+          <Link className="text-ivory/80 hover:text-leaf" to="/impact">{t('nav.impact')}</Link>
+          <Link className="text-ivory/80 hover:text-leaf" to="/sponsor-us">{t('nav.sponsorUs')}</Link>
+          <Link className="text-ivory/80 hover:text-leaf" to="/terms">{t('footer.terms')}</Link>
+          <Link className="text-ivory/80 hover:text-leaf" to="/privacy">{t('footer.privacy')}</Link>
+          <Link className="text-ivory/80 hover:text-leaf" to="/disclaimer">{t('footer.disclaimer')}</Link>
+          <a className="text-ivory/80 hover:text-leaf" href="https://github.com/sia-uo/surplus-serve" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
         <div className="text-sm text-ivory/60">
-          <p className="rounded-xl border border-gold/30 p-3 text-ivory/75">⚖️ {t('footer.disclaimerShort')}</p>
+          <p className="rounded-xl border border-leaf/30 p-3 text-ivory/75">⚖️ {t('footer.disclaimerShort')}</p>
           <p className="mt-3">© {new Date().getFullYear()} SurplusServe · {t('footer.rights')}</p>
         </div>
       </div>
@@ -190,7 +190,7 @@ export function Layout() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <a href="#main" className="sr-only rounded bg-gold px-3 py-2 text-verd focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[1000]">
+      <a href="#main" className="sr-only rounded bg-leaf px-3 py-2 text-verd focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[1000]">
         Skip to content
       </a>
       <OfflineBanner />

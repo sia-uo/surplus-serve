@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { Container } from '../components/Layout';
-import { Crest } from '../components/Logo';
+import { Emblem } from '../components/Logo';
 import { Alert, Button, Field, Loading } from '../components/ui';
 import { useI18n } from '../i18n';
 import { api } from '../lib/api';
@@ -42,7 +42,7 @@ export default function Login() {
   return (
     <Container className="max-w-md">
       <div className="card animate-rise p-8 text-center">
-        <Crest className="mx-auto size-20" />
+        <Emblem className="mx-auto size-20" />
         <h1 className="mt-4 text-3xl font-bold text-verd">{t('login.title')}</h1>
         <p className="mt-2 text-ink/70">{t('login.subtitle')}</p>
         {params.get('error') && (

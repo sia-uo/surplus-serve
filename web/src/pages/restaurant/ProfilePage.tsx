@@ -17,7 +17,7 @@ export default function RestaurantProfilePage() {
       <VerificationBanner />
       {restaurant && (
         <div className="mb-4 flex flex-wrap gap-2">
-          <Badge tone={restaurant.verification === 'approved' ? 'green' : restaurant.verification === 'rejected' ? 'red' : 'gold'}>
+          <Badge tone={restaurant.verification === 'approved' ? 'green' : restaurant.verification === 'rejected' ? 'red' : 'leaf'}>
             {t(`verification.${restaurant.verification}` as MessageKey)}
           </Badge>
           <Badge tone="verd">

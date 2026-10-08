@@ -51,7 +51,7 @@ function VerificationCard({ item, type, onDone }: { item: Item; type: 'restauran
           </p>
         </div>
         <div className="flex flex-wrap gap-1.5">
-          <Badge tone={p.verification === 'approved' ? 'green' : p.verification === 'rejected' ? 'red' : 'gold'}>{t(`verification.${p.verification}` as MessageKey)}</Badge>
+          <Badge tone={p.verification === 'approved' ? 'green' : p.verification === 'rejected' ? 'red' : 'leaf'}>{t(`verification.${p.verification}` as MessageKey)}</Badge>
           {isRestaurant && r.premium && <PartnerBadge />}
           {item.userStatus === 'suspended' && <Badge tone="red">{t('admin.suspend')}</Badge>}
         </div>
@@ -109,8 +109,8 @@ function VerificationCard({ item, type, onDone }: { item: Item; type: 'restauran
             </Button>
           )}
           {isRestaurant && (
-            <Button variant="gold-solid" className="min-h-9 py-1.5" loading={busy === 'p'} onClick={() => act(`/api/admin/restaurants/${item.userId}/premium`, { premium: !r.premium }, 'p')}>
-              ♛ {r.premium ? t('admin.premiumOff') : t('admin.premiumOn')}
+            <Button variant="leaf-solid" className="min-h-9 py-1.5" loading={busy === 'p'} onClick={() => act(`/api/admin/restaurants/${item.userId}/premium`, { premium: !r.premium }, 'p')}>
+              🌿 {r.premium ? t('admin.premiumOff') : t('admin.premiumOn')}
             </Button>
           )}
         </div>

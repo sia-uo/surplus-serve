@@ -46,7 +46,7 @@ export function VineFlourish({ className, flip }: { className?: string; flip?: b
     >
       <defs>
         <linearGradient id="vf-stem" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#cfa64a" />
+          <stop offset="0" stopColor="#c9e3ad" />
           <stop offset="1" stopColor="#8fbf6c" />
         </linearGradient>
         <radialGradient id="vf-grape" cx=".35" cy=".35" r=".7">

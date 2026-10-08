@@ -113,9 +113,9 @@ export function layout(env: Env, baseUrl: string, title: string, body: string): 
   const app = escapeHtml(env.APP_NAME || 'SurplusServe');
   return `<!doctype html><html><body style="margin:0;background:#F8F4E8;font-family:Inter,Arial,sans-serif;color:#0F2A1F">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#F8F4E8;padding:24px 0"><tr><td align="center">
-<table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border:1px solid #CFA64A;border-radius:14px;overflow:hidden">
-<tr><td style="background:#0F2A1F;padding:20px 28px;border-bottom:3px solid #CFA64A">
-<span style="font-family:Georgia,serif;font-size:22px;color:#CFA64A;font-weight:bold;letter-spacing:.5px">${app}</span></td></tr>
+<table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border:1px solid #8FBF6C;border-radius:14px;overflow:hidden">
+<tr><td style="background:#0F2A1F;padding:20px 28px;border-bottom:3px solid #8FBF6C">
+<span style="font-family:Georgia,serif;font-size:22px;color:#8FBF6C;font-weight:bold;letter-spacing:.5px">${app}</span></td></tr>
 <tr><td style="padding:28px">
 <h1 style="font-family:Georgia,serif;font-size:22px;margin:0 0 16px;color:#0F2A1F">${escapeHtml(title)}</h1>
 ${body}

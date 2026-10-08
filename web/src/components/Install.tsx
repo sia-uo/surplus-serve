@@ -3,7 +3,7 @@ import { useI18n } from '../i18n';
 import { useInstall } from '../lib/pwa';
 import { cx, Modal } from './ui';
 
-export function InstallButton({ className, variant = 'gold' }: { className?: string; variant?: 'gold' | 'gold-solid' }) {
+export function InstallButton({ className, variant = 'leaf' }: { className?: string; variant?: 'leaf' | 'leaf-solid' }) {
   const { t } = useI18n();
   const { mode, install } = useInstall();
   const [iosOpen, setIosOpen] = useState(false);
@@ -24,7 +24,7 @@ export function IosInstructions({ open, onClose }: { open: boolean; onClose: () 
     <Modal open={open} onClose={onClose} title={t('install.iosTitle')}>
       <ol className="space-y-4 text-ink">
         <li className="flex gap-3">
-          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-verd font-bold text-gold">1</span>
+          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-verd font-bold text-leaf">1</span>
           <span className="pt-1">
             {t('install.iosStep1')}{' '}
             <svg aria-hidden viewBox="0 0 24 24" className="inline size-5 align-text-bottom text-[#007AFF]" fill="none" stroke="currentColor" strokeWidth="2">
@@ -33,11 +33,11 @@ export function IosInstructions({ open, onClose }: { open: boolean; onClose: () 
           </span>
         </li>
         <li className="flex gap-3">
-          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-verd font-bold text-gold">2</span>
+          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-verd font-bold text-leaf">2</span>
           <span className="pt-1">{t('install.iosStep2')} ➕</span>
         </li>
         <li className="flex gap-3">
-          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-verd font-bold text-gold">3</span>
+          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-verd font-bold text-leaf">3</span>
           <span className="pt-1">{t('install.iosStep3')}</span>
         </li>
       </ol>

@@ -24,7 +24,7 @@ export default function CityIndex() {
             <li key={c.city}>
               <Link to={`/impact/${encodeURIComponent(c.city)}`} className="card block p-6 transition hover:-translate-y-0.5 hover:shadow-xl">
                 <span className="font-serif text-2xl font-bold text-verd">{c.label}</span>
-                <span className="mt-1 block text-gold-dark">{t('city.meals', { n: fmtNumber(c.meals, intl) })} →</span>
+                <span className="mt-1 block text-leaf-dark">{t('city.meals', { n: fmtNumber(c.meals, intl) })} →</span>
               </Link>
             </li>
           ))}

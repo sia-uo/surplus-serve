@@ -46,7 +46,7 @@ export default function AdminClaims() {
                   </td>
                   <td className="px-4">{c.servings}</td>
                   <td className="px-4">
-                    <Badge tone={c.status === 'completed' ? 'green' : c.status === 'pending' ? 'gold' : c.status === 'no_show' ? 'red' : 'gray'}>{t(`claim.${c.status}` as MessageKey)}</Badge>
+                    <Badge tone={c.status === 'completed' ? 'green' : c.status === 'pending' ? 'leaf' : c.status === 'no_show' ? 'red' : 'gray'}>{t(`claim.${c.status}` as MessageKey)}</Badge>
                   </td>
                   <td className="px-4 text-xs">{fmtDateTime(c.createdAt, intl)}</td>
                 </tr>

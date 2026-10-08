@@ -94,7 +94,7 @@ export function AddressPicker({ value, onChange }: { value: AddressValue; onChan
         <ul className="divide-y divide-ink/10 overflow-hidden rounded-xl border border-ink/15 bg-white" role="listbox">
           {results.map((r) => (
             <li key={`${r.lat},${r.lng}`}>
-              <button type="button" className="w-full px-4 py-3 text-left text-sm text-ink hover:bg-gold/10" onClick={() => choose(r)}>
+              <button type="button" className="w-full px-4 py-3 text-left text-sm text-ink hover:bg-leaf/10" onClick={() => choose(r)}>
                 {r.label}
               </button>
             </li>
@@ -109,11 +109,11 @@ export function AddressPicker({ value, onChange }: { value: AddressValue; onChan
           📍 {t('profile.useLocation')}
         </Button>
       </div>
-      <div className="overflow-hidden rounded-2xl border border-gold/40">
+      <div className="overflow-hidden rounded-2xl border border-leaf/40">
         <Suspense
           fallback={
             <div className="grid h-64 place-items-center bg-ivory-200">
-              <Spinner className="text-gold-dark" />
+              <Spinner className="text-leaf-dark" />
             </div>
           }
         >

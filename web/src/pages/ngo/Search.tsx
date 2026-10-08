@@ -56,7 +56,7 @@ export function ClaimSuccess({ claim }: { claim: Claim }) {
         </div>
       )}
       {claim.packagingCost > 0 && <p className="text-sm text-ink/80">📦 {t('claimModal.payNote', { amount: claim.packagingCost * claim.servings })}</p>}
-      <LinkButton to="/ngo/claims" variant="gold-solid" className="w-full">
+      <LinkButton to="/ngo/claims" variant="leaf-solid" className="w-full">
         {t('claimModal.viewClaims')}
       </LinkButton>
     </div>
@@ -121,7 +121,7 @@ function ClaimDialog({ listing, onClose, onClaimed }: { listing: Listing; onClos
             </div>
             <span className="hint">{t('claimModal.max', { n: listing.servingsRemaining })}</span>
           </label>
-          {listing.packagingCost > 0 && <p className="rounded-xl bg-gold/10 p-3 text-sm text-ink">📦 {t('claimModal.payNote', { amount: listing.packagingCost * servings })}</p>}
+          {listing.packagingCost > 0 && <p className="rounded-xl bg-leaf/10 p-3 text-sm text-ink">📦 {t('claimModal.payNote', { amount: listing.packagingCost * servings })}</p>}
           <div className="rounded-xl border border-vine/30 bg-vine/5 p-2">
             <Checkbox checked={ack} onChange={setAck}>
               {t('claimModal.ack')}
@@ -255,7 +255,7 @@ export default function NgoSearch() {
             {suggestions.map((s) => (
               <li key={`${s.lat},${s.lng}`}>
                 <button
-                  className="w-full px-4 py-3 text-left text-sm text-ink hover:bg-gold/10"
+                  className="w-full px-4 py-3 text-left text-sm text-ink hover:bg-leaf/10"
                   onClick={() => {
                     setPlace({ lat: s.lat, lng: s.lng, label: s.label });
                     setSuggestions([]);
@@ -274,7 +274,7 @@ export default function NgoSearch() {
             <span className="label">{t('search.radius')}</span>
             <div className="flex gap-1.5" role="radiogroup">
               {RADIUS_OPTIONS_KM.map((r) => (
-                <button key={r} type="button" role="radio" aria-checked={radius === r} onClick={() => setRadius(r)} className={cx('chip', radius === r ? 'border-verd bg-verd text-gold' : 'border-ink/20 bg-white text-ink')}>
+                <button key={r} type="button" role="radio" aria-checked={radius === r} onClick={() => setRadius(r)} className={cx('chip', radius === r ? 'border-verd bg-verd text-leaf' : 'border-ink/20 bg-white text-ink')}>
                   {r} km
                 </button>
               ))}
@@ -297,7 +297,7 @@ export default function NgoSearch() {
           </label>
           <div className="ml-auto flex overflow-hidden rounded-full border border-verd" role="tablist">
             {(['list', 'map'] as const).map((v) => (
-              <button key={v} role="tab" aria-selected={view === v} onClick={() => setView(v)} className={cx('min-h-10 px-4 text-sm font-semibold', view === v ? 'bg-verd text-gold' : 'bg-white text-verd')}>
+              <button key={v} role="tab" aria-selected={view === v} onClick={() => setView(v)} className={cx('min-h-10 px-4 text-sm font-semibold', view === v ? 'bg-verd text-leaf' : 'bg-white text-verd')}>
                 {v === 'list' ? `☰ ${t('search.list')}` : `🗺 ${t('search.map')}`}
               </button>
             ))}
@@ -311,7 +311,7 @@ export default function NgoSearch() {
       ) : (
         <>
           <p className="mb-4 flex flex-wrap items-center gap-2 text-sm text-ivory/80" aria-live="polite">
-            {loading && <Spinner small className="text-gold" />}
+            {loading && <Spinner small className="text-leaf" />}
             <span>
               {t('search.near', { place: place.label.length > 60 ? `${place.label.slice(0, 60)}…` : place.label })} ·{' '}
               {result && t('search.results', { n: result.total, km: radius })}
@@ -323,8 +323,8 @@ export default function NgoSearch() {
             <SkeletonCards />
           ) : view === 'map' ? (
             <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-              <div className="overflow-hidden rounded-2xl border border-gold/50">
-                <Suspense fallback={<div className="grid h-[60vh] place-items-center bg-verd-800"><Spinner className="text-gold" /></div>}>
+              <div className="overflow-hidden rounded-2xl border border-leaf/50">
+                <Suspense fallback={<div className="grid h-[60vh] place-items-center bg-verd-800"><Spinner className="text-leaf" /></div>}>
                   <MapView
                     className="h-[60vh] w-full"
                     center={place}
@@ -354,7 +354,7 @@ export default function NgoSearch() {
               title={t('search.noResults')}
               body={t('search.noResultsHint')}
               action={
-                <Link to="/ngo/profile" className="btn btn-gold">
+                <Link to="/ngo/profile" className="btn btn-leaf">
                   🔔 {t('profile.alerts')}
                 </Link>
               }
@@ -378,7 +378,7 @@ export default function NgoSearch() {
           )}
           {result?.hasMore && (
             <div className="mt-6 flex justify-center">
-              <Button variant="gold" loading={loading} onClick={() => setPage((p) => p + 1)}>
+              <Button variant="leaf" loading={loading} onClick={() => setPage((p) => p + 1)}>
                 {t('common.next')} →
               </Button>
             </div>

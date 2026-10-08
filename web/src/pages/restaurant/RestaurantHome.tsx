@@ -57,7 +57,7 @@ function VerifyCard({ claim, onVerified }: { claim: Claim; onVerified: () => voi
           ⏰ {t('restaurant.collectBy')} {fmtDateTime(claim.pickupBy, intl)}
         </Badge>
         {claim.ngo && <Badge tone="gray">{t('restaurant.reliability', { score: claim.ngo.reliabilityScore })}</Badge>}
-        {claim.packagingCost > 0 && <Badge tone="gold">₹{claim.packagingCost * claim.servings}</Badge>}
+        {claim.packagingCost > 0 && <Badge tone="leaf">₹{claim.packagingCost * claim.servings}</Badge>}
       </div>
       {done ? (
         <Alert tone="success" className="mt-4">
@@ -162,7 +162,7 @@ export default function RestaurantHome() {
       )}
 
       <section aria-labelledby="verify-h" className="mb-10">
-        <h2 id="verify-h" className="mb-4 flex items-center gap-3 text-2xl font-bold text-gold">
+        <h2 id="verify-h" className="mb-4 flex items-center gap-3 text-2xl font-bold text-leaf">
           {t('restaurant.toVerify')}
           {dash.data && dash.data.pendingPickups > 0 && <Badge tone="red">{dash.data.pendingPickups}</Badge>}
         </h2>
@@ -194,7 +194,7 @@ export default function RestaurantHome() {
       </section>
 
       <section aria-labelledby="listings-h" className="mb-10">
-        <h2 id="listings-h" className="mb-4 text-2xl font-bold text-gold">
+        <h2 id="listings-h" className="mb-4 text-2xl font-bold text-leaf">
           {t('nav.myListings')}
         </h2>
         <Tabs dark value={tab} onChange={setTab} tabs={statuses.map((s) => ({ value: s, label: t(`listing.${s}` as MessageKey), count: dash.data?.counts[s] }))} />
@@ -214,7 +214,7 @@ export default function RestaurantHome() {
                   showStatus
                   actions={
                     <>
-                      {!!l.pendingClaims && <Badge tone="gold">{t('restaurant.pendingClaims', { n: l.pendingClaims })}</Badge>}
+                      {!!l.pendingClaims && <Badge tone="leaf">{t('restaurant.pendingClaims', { n: l.pendingClaims })}</Badge>}
                       {l.status === 'active' && !l.pendingClaims && (
                         <Button variant="outline" className="min-h-9 py-1.5" onClick={() => cancel(l.id)}>
                           {t('restaurant.cancelListing')}
@@ -231,7 +231,7 @@ export default function RestaurantHome() {
       </section>
 
       <section aria-labelledby="history-h">
-        <h2 id="history-h" className="mb-4 text-2xl font-bold text-gold">
+        <h2 id="history-h" className="mb-4 text-2xl font-bold text-leaf">
           {t('restaurant.history')}
         </h2>
         {history.error ? (

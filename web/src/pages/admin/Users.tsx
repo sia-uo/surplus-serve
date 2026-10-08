@@ -65,7 +65,7 @@ export default function AdminUsers() {
           <option value="ngo">{t('onboarding.ngo')}</option>
           <option value="admin">{t('nav.admin')}</option>
         </select>
-        <label className="chip border-gold/40 text-ivory">
+        <label className="chip border-leaf/40 text-ivory">
           <input type="checkbox" className="mr-2 accent-vine" checked={onlySuspended} onChange={(e) => setOnlySuspended(e.target.checked)} />
           {t('status.suspendedTitle')}
         </label>
@@ -104,11 +104,11 @@ export default function AdminUsers() {
                   <td className="px-4">
                     <span className="capitalize">{u.role ?? '—'}</span>
                     {u.verification && (
-                      <Badge tone={u.verification === 'approved' ? 'green' : u.verification === 'rejected' ? 'red' : 'gold'} className="ml-1">
+                      <Badge tone={u.verification === 'approved' ? 'green' : u.verification === 'rejected' ? 'red' : 'leaf'} className="ml-1">
                         {t(`verification.${u.verification}` as MessageKey)}
                       </Badge>
                     )}
-                    {u.premium && <span className="ml-1 text-gold-dark">♛</span>}
+                    {u.premium && <span className="ml-1 text-leaf-dark">🌿</span>}
                   </td>
                   <td className="px-4">
                     <Badge tone={u.status === 'active' ? 'green' : 'red'}>{u.status}</Badge>
@@ -120,7 +120,7 @@ export default function AdminUsers() {
                   <td className="px-4 text-xs">{fmtDate(u.createdAt, intl)}</td>
                   <td className="px-4 text-right">
                     {u.role !== 'admin' && (
-                      <Button variant={u.status === 'active' ? 'outline' : 'gold-solid'} className="min-h-9 py-1" loading={busy === u.id} onClick={() => toggle(u)}>
+                      <Button variant={u.status === 'active' ? 'outline' : 'leaf-solid'} className="min-h-9 py-1" loading={busy === u.id} onClick={() => toggle(u)}>
                         {u.status === 'active' ? t('admin.suspend') : t('admin.reinstate')}
                       </Button>
                     )}

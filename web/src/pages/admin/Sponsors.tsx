@@ -134,7 +134,7 @@ export default function AdminSponsors() {
                 </div>
                 <h3 className="mt-3 font-serif text-lg font-bold text-verd">{s.name}</h3>
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  <Badge tone="gold">{t(`admin.tier.${s.tier}` as MessageKey)}</Badge>
+                  <Badge tone="leaf">{t(`admin.tier.${s.tier}` as MessageKey)}</Badge>
                   <Badge tone="verd">{s.city === 'all' ? '🇮🇳 all' : titleCase(s.city)}</Badge>
                   <Badge tone={state === 'live' ? 'green' : state === 'scheduled' ? 'outline' : 'gray'}>{t(`admin.${state}` as MessageKey)}</Badge>
                 </div>

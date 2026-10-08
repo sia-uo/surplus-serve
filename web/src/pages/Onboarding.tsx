@@ -59,7 +59,7 @@ export default function Onboarding() {
                 onClick={() => setChoice(value)}
                 className={cx(
                   'rounded-2xl border-2 p-5 text-left transition',
-                  choice === value ? 'border-vine bg-vine/5 shadow-lg' : 'border-ink/15 bg-white hover:border-gold-dark',
+                  choice === value ? 'border-vine bg-vine/5 shadow-lg' : 'border-ink/15 bg-white hover:border-leaf-dark',
                 )}
               >
                 <span className="text-4xl" aria-hidden>

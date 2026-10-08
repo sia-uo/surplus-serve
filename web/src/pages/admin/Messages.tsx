@@ -55,7 +55,7 @@ export default function AdminMessages() {
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge tone={m.kind === 'sponsor' ? 'gold' : 'verd'}>{t(`admin.kind.${m.kind}` as MessageKey)}</Badge>
+                    <Badge tone={m.kind === 'sponsor' ? 'leaf' : 'verd'}>{t(`admin.kind.${m.kind}` as MessageKey)}</Badge>
                     <span className="text-xs text-ink/60">{fmtDateTime(m.createdAt, intl)}</span>
                   </div>
                 </div>

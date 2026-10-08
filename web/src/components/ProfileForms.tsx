@@ -182,7 +182,7 @@ export function NgoProfileForm({ initial, onSaved }: { initial: NgoProfile | nul
                 type="button"
                 key={r}
                 onClick={() => setForm({ ...form, alertRadiusKm: r })}
-                className={`chip ${form.alertRadiusKm === r ? 'border-gold bg-gold text-verd' : 'border-ink/20 text-ink'}`}
+                className={`chip ${form.alertRadiusKm === r ? 'border-leaf bg-leaf text-verd' : 'border-ink/20 text-ink'}`}
                 aria-pressed={form.alertRadiusKm === r}
               >
                 {r} km

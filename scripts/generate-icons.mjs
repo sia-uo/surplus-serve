@@ -13,7 +13,7 @@ async function plain(size, out) {
   await sharp(svg, { density: 384 }).resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toFile(out);
 }
 
-/** Shield centred on a full-bleed verd-green square; `scale` keeps it inside the maskable safe zone. */
+/** Emblem centred on a full-bleed verd-green square; `scale` keeps it inside the maskable safe zone. */
 async function onBackground(size, scale, out) {
   const inner = Math.round(size * scale);
   const logo = await sharp(svg, { density: 384 }).resize(inner, inner, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();

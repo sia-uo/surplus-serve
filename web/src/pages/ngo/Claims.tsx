@@ -43,7 +43,7 @@ function ClaimCard({ claim, onChange }: { claim: Claim; onChange: () => void }) 
         </div>
         <div className="flex gap-1.5">
           <FoodTypeBadge type={claim.foodType} />
-          <Badge tone={claim.status === 'completed' ? 'green' : claim.status === 'pending' ? 'gold' : claim.status === 'no_show' ? 'red' : 'gray'}>{t(`claim.${claim.status}` as MessageKey)}</Badge>
+          <Badge tone={claim.status === 'completed' ? 'green' : claim.status === 'pending' ? 'leaf' : claim.status === 'no_show' ? 'red' : 'gray'}>{t(`claim.${claim.status}` as MessageKey)}</Badge>
         </div>
       </div>
 

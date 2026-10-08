@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { CO2_PER_KG_FOOD, KG_PER_MEAL } from '../../../../shared/constants';
 import type { SponsorReport } from '../../../../shared/types';
-import { Crest } from '../../components/Logo';
+import { Emblem } from '../../components/Logo';
 import { Button, ErrorState, Loading } from '../../components/ui';
 import { useI18n } from '../../i18n';
 import { fmtDate } from '../../lib/format';
@@ -24,10 +24,10 @@ export default function ReportPrint() {
         <div className="no-print mb-6 flex justify-end">
           <Button onClick={() => window.print()}>🖨 {t('common.print')}</Button>
         </div>
-        <header className="flex items-center gap-5 border-b-4 border-double border-gold pb-6">
-          <Crest className="size-20" />
+        <header className="flex items-center gap-5 border-b-4 border-double border-leaf pb-6">
+          <Emblem className="size-20" />
           <div>
-            <p className="text-xs font-semibold tracking-[0.2em] text-gold-dark uppercase">SurplusServe</p>
+            <p className="text-xs font-semibold tracking-[0.2em] text-leaf-dark uppercase">SurplusServe</p>
             <h1 className="font-serif text-3xl font-bold text-verd">{t('admin.reportTitle')}</h1>
             <p className="text-ink/70">
               {data.city} · {fmtDate(data.from, intl)} – {fmtDate(data.to, intl)}
@@ -35,7 +35,7 @@ export default function ReportPrint() {
           </div>
         </header>
         {data.sponsors.length > 0 && (
-          <section className="my-6 rounded-2xl border border-gold/50 bg-ivory p-5 text-center">
+          <section className="my-6 rounded-2xl border border-leaf/50 bg-ivory p-5 text-center">
             <p className="font-serif text-lg text-verd">{t('city.supportedBy', { city: data.city })}</p>
             <div className="mt-3 flex flex-wrap items-center justify-center gap-6">
               {data.sponsors.map((s) =>

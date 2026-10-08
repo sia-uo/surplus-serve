@@ -42,7 +42,7 @@ export default function CityImpact() {
 
       <section className="mt-12 text-center">
         <h2 className="text-2xl font-bold sm:text-3xl">
-          <span className="gold-text">{t('city.supportedBy', { city: data.label })}</span>
+          <span className="leaf-text">{t('city.supportedBy', { city: data.label })}</span>
         </h2>
         <div className="mt-6">
           {data.sponsors.length ? (
@@ -50,7 +50,7 @@ export default function CityImpact() {
           ) : (
             <div className="space-y-4">
               <p className="text-ivory/70 italic">{t('city.noSponsors', { city: data.label })}</p>
-              <LinkButton to="/sponsor-us" variant="gold">
+              <LinkButton to="/sponsor-us" variant="leaf">
                 {t('sponsors.cta')}
               </LinkButton>
             </div>
@@ -60,12 +60,12 @@ export default function CityImpact() {
 
       {data.topRestaurants.length > 0 && (
         <section className="mx-auto mt-12 max-w-2xl">
-          <h2 className="mb-4 text-center text-2xl font-bold text-gold">{t('city.topRestaurants')}</h2>
+          <h2 className="mb-4 text-center text-2xl font-bold text-leaf">{t('city.topRestaurants')}</h2>
           <ol className="card divide-y divide-ink/10 p-0">
             {data.topRestaurants.map((r, i) => (
               <li key={r.name + i} className="flex items-center justify-between gap-3 px-5 py-3">
                 <span className="flex flex-wrap items-center gap-2 font-medium text-verd">
-                  <span className="font-serif text-gold-dark">{i + 1}.</span> {r.name} {r.premium && <PartnerBadge />}
+                  <span className="font-serif text-leaf-dark">{i + 1}.</span> {r.name} {r.premium && <PartnerBadge />}
                 </span>
                 <span className="text-sm whitespace-nowrap text-ink/70">{t('city.meals', { n: fmtNumber(r.meals, intl) })}</span>
               </li>

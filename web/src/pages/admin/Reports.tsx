@@ -26,7 +26,7 @@ export function ReportBody({ report }: { report: SponsorReport }) {
           <h3 className="mb-3 font-serif text-lg font-bold text-verd">{t('admin.daily')}</h3>
           <div className="flex h-40 items-end gap-0.5" role="img" aria-label={t('admin.daily')}>
             {report.daily.map((d) => (
-              <div key={d.date} title={`${d.date}: ${d.meals}`} className="min-w-1 flex-1 rounded-t bg-gradient-to-t from-gold-dark to-gold" style={{ height: `${Math.max(2, (d.meals / max) * 100)}%` }} />
+              <div key={d.date} title={`${d.date}: ${d.meals}`} className="min-w-1 flex-1 rounded-t bg-gradient-to-t from-leaf-dark to-leaf" style={{ height: `${Math.max(2, (d.meals / max) * 100)}%` }} />
             ))}
           </div>
           <div className="mt-1 flex justify-between text-xs text-ink/60">
@@ -105,14 +105,14 @@ export default function AdminReports() {
       ) : data ? (
         <>
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="font-serif text-2xl font-bold text-gold">
+            <h2 className="font-serif text-2xl font-bold text-leaf">
               {data.city} · {data.from} → {data.to}
             </h2>
             <div className="flex gap-2">
-              <a className="btn btn-gold" href={`/api/admin/report${qs({ ...submitted, format: 'csv' })}`} download>
+              <a className="btn btn-leaf" href={`/api/admin/report${qs({ ...submitted, format: 'csv' })}`} download>
                 ⬇ {t('admin.csv')}
               </a>
-              <a className="btn btn-gold-solid" href={`/admin/reports/print${query}`} target="_blank" rel="noreferrer">
+              <a className="btn btn-leaf-solid" href={`/admin/reports/print${query}`} target="_blank" rel="noreferrer">
                 🖨 {t('admin.printable')}
               </a>
             </div>

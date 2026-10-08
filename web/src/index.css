@@ -6,9 +6,8 @@
 /*
  * Verd & Vine theme
  *  verd  — deep verdant greens (backgrounds, navigation, headings on cream)
- *  vine  — ripe wine-grape (primary actions, urgent badges)
- *  gold  — warm brass accent (borders, highlights, icons)
- *  leaf  — fresh sprig green (small accents, ornaments)
+ *  vine  — ripe wine-grape (primary actions, urgent badges, grapes)
+ *  leaf  — fresh vine-leaf green (accents, borders, highlights, icons)
  *  ivory — cream card surfaces
  */
 @theme {
@@ -22,10 +21,8 @@
   --color-vine-700: #5c1730;
   --color-vine-400: #a8476a;
   --color-leaf: #8fbf6c;
-  --color-leaf-light: #c6e0a8;
-  --color-gold: #cfa64a;
-  --color-gold-light: #ead290;
-  --color-gold-dark: #735a14; /* readable gold for text on ivory (AA) */
+  --color-leaf-light: #c9e3ad;
+  --color-leaf-dark: #2f6b45; /* readable leaf green for text on ivory (AA) */
   --color-ivory: #f8f4e8;
   --color-ivory-200: #ece5d1;
   --color-ink: #19291f;
@@ -70,7 +67,7 @@
     @apply bg-verd font-sans text-ivory antialiased;
     /* soft light pools + a faint hand-drawn leaf pattern */
     background-image:
-      radial-gradient(1100px 520px at 50% -220px, rgb(207 166 74 / 0.16), transparent 70%),
+      radial-gradient(1100px 520px at 50% -220px, rgb(143 191 108 / 0.14), transparent 70%),
       radial-gradient(760px 420px at 105% 8%, rgb(122 31 61 / 0.28), transparent 70%),
       radial-gradient(700px 420px at -10% 85%, rgb(143 191 108 / 0.12), transparent 70%),
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%238fbf6c' stroke-opacity='0.07' stroke-width='1.2'%3E%3Cpath d='M20 70c10-22 30-28 44-26-6 16-22 30-44 26z'/%3E%3Cpath d='M20 70c14-10 26-16 44-26'/%3E%3Cpath d='M86 18c6 10 4 22-6 30-6-10-4-22 6-30z'/%3E%3Ccircle cx='96' cy='96' r='3'/%3E%3Ccircle cx='103' cy='100' r='3'/%3E%3Ccircle cx='99' cy='106' r='3'/%3E%3C/g%3E%3C/svg%3E");
@@ -81,7 +78,7 @@
     @apply font-serif tracking-tight;
   }
   :focus-visible {
-    outline: 3px solid var(--color-gold);
+    outline: 3px solid var(--color-leaf);
     outline-offset: 2px;
   }
   ::selection {
@@ -96,32 +93,32 @@
 }
 
 @layer components {
-  .gold-text {
-    background: linear-gradient(120deg, #f3e2a6 0%, #cfa64a 40%, #ead290 58%, #a7832a 100%);
+  .leaf-text {
+    background: linear-gradient(120deg, #f3f8ea 0%, #c9e3ad 42%, #8fbf6c 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  .gold-rule {
+  .leaf-rule {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-leaf), transparent);
   }
   /* Centered vine flourish used between sections:  ───── ❦ ───── */
   .vine-divider {
-    @apply flex items-center justify-center gap-4 text-gold;
+    @apply flex items-center justify-center gap-4 text-leaf;
   }
   .vine-divider::before,
   .vine-divider::after {
     content: '';
     height: 1px;
     width: min(28vw, 220px);
-    background: linear-gradient(90deg, transparent, rgb(207 166 74 / 0.7));
+    background: linear-gradient(90deg, transparent, rgb(143 191 108 / 0.7));
   }
   .vine-divider::after {
-    background: linear-gradient(270deg, transparent, rgb(207 166 74 / 0.7));
+    background: linear-gradient(270deg, transparent, rgb(143 191 108 / 0.7));
   }
   .card {
-    @apply rounded-[1.25rem] border border-gold/35 text-ink;
+    @apply rounded-[1.25rem] border border-leaf/35 text-ink;
     background: linear-gradient(180deg, #fcf9f1 0%, var(--color-ivory) 55%, #f3ecda 100%);
     box-shadow:
       0 1px 0 rgb(255 255 255 / 0.8) inset,
@@ -129,7 +126,7 @@
       0 2px 6px -2px rgb(4 18 11 / 0.25);
   }
   .card-dark {
-    @apply rounded-[1.25rem] border border-gold/25 text-ivory backdrop-blur;
+    @apply rounded-[1.25rem] border border-leaf/25 text-ivory backdrop-blur;
     background: linear-gradient(160deg, rgb(29 75 56 / 0.72), rgb(15 42 31 / 0.72) 60%, rgb(92 23 48 / 0.35));
     box-shadow: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 18px 40px -22px rgb(0 0 0 / 0.7);
   }
@@ -141,11 +138,11 @@
     background: linear-gradient(135deg, #9b2b52 0%, var(--color-vine) 55%, #5c1730 100%);
     box-shadow: 0 1px 0 rgb(255 255 255 / 0.18) inset, 0 8px 20px -8px rgb(122 31 61 / 0.85);
   }
-  .btn-gold {
-    @apply border border-gold bg-transparent text-gold hover:bg-gold hover:text-verd;
+  .btn-leaf {
+    @apply border border-leaf bg-transparent text-leaf hover:bg-leaf hover:text-verd;
   }
-  .btn-gold-solid {
-    @apply bg-gradient-to-r from-gold-light via-gold to-gold-dark text-verd hover:-translate-y-px hover:brightness-110;
+  .btn-leaf-solid {
+    @apply bg-gradient-to-r from-leaf-light to-leaf text-verd hover:-translate-y-px hover:brightness-105;
   }
   .btn-ghost {
     @apply text-ink hover:bg-ink/5;
@@ -206,12 +203,12 @@ html:not([lang^='en']) .tracking-widest {
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
   background: var(--color-verd);
-  border: 2px solid var(--color-gold);
+  border: 2px solid var(--color-leaf);
   box-shadow: 0 4px 10px rgb(0 0 0 / 0.35);
 }
 .ss-marker span {
   transform: rotate(45deg);
-  color: var(--color-gold);
+  color: var(--color-leaf);
   font-size: 11px;
   font-weight: 700;
 }
@@ -222,7 +219,7 @@ html:not([lang^='en']) .tracking-widest {
   color: #fff;
 }
 .ss-marker.me {
-  background: var(--color-gold);
+  background: var(--color-leaf);
   border-color: var(--color-verd);
   border-radius: 50%;
   width: 18px;

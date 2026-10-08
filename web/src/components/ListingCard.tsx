@@ -5,10 +5,10 @@ import { useI18n, type MessageKey } from '../i18n';
 import { fmtDateTime, fmtTime } from '../lib/format';
 import { Badge, cx } from './ui';
 
-export const FOOD_BADGE: Record<string, { tone: 'green' | 'red' | 'gold'; icon: string }> = {
+export const FOOD_BADGE: Record<string, { tone: 'green' | 'red' | 'leaf'; icon: string }> = {
   veg: { tone: 'green', icon: '🟢' },
   nonveg: { tone: 'red', icon: '🔺' },
-  jain: { tone: 'gold', icon: '✳️' },
+  jain: { tone: 'leaf', icon: '✳️' },
 };
 
 export function FoodTypeBadge({ type }: { type: string }) {
@@ -19,15 +19,15 @@ export function FoodTypeBadge({ type }: { type: string }) {
 
 export function ListingStatusBadge({ status }: { status: string }) {
   const { t } = useI18n();
-  const tone = status === 'active' ? 'green' : status === 'claimed' ? 'gold' : status === 'completed' ? 'verd' : 'gray';
+  const tone = status === 'active' ? 'green' : status === 'claimed' ? 'leaf' : status === 'completed' ? 'verd' : 'gray';
   return <Badge tone={tone}>{t(`listing.${status}` as MessageKey)}</Badge>;
 }
 
 export function PartnerBadge() {
   const { t } = useI18n();
   return (
-    <Badge tone="gold" className="shadow-sm">
-      ♛ {t('card.partner')}
+    <Badge tone="leaf" className="shadow-sm">
+      🌿 {t('card.partner')}
     </Badge>
   );
 }
@@ -37,11 +37,11 @@ export function ListingCard({ listing: l, actions, showStatus, onSelect, highlig
   return (
     <article
       id={`listing-${l.id}`}
-      className={cx('card relative flex animate-rise flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-2xl', l.urgent && 'ring-2 ring-vine/70', highlighted && 'ring-2 ring-gold')}
+      className={cx('card relative flex animate-rise flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-2xl', l.urgent && 'ring-2 ring-vine/70', highlighted && 'ring-2 ring-leaf')}
     >
       <div
         aria-hidden
-        className={cx('h-1 w-full', l.foodType === 'nonveg' ? 'bg-gradient-to-r from-vine to-vine-400' : l.foodType === 'jain' ? 'bg-gradient-to-r from-gold-dark to-gold' : 'bg-gradient-to-r from-verd-600 to-leaf')}
+        className={cx('h-1 w-full', l.foodType === 'nonveg' ? 'bg-gradient-to-r from-vine to-vine-400' : l.foodType === 'jain' ? 'bg-gradient-to-r from-leaf-dark to-leaf' : 'bg-gradient-to-r from-verd-600 to-leaf')}
       />
       {l.photoUrl && (
         <button type="button" onClick={onSelect} className="block aspect-[16/9] w-full overflow-hidden bg-ivory-200" tabIndex={-1}>
@@ -64,7 +64,7 @@ export function ListingCard({ listing: l, actions, showStatus, onSelect, highlig
           <h3 className="font-serif text-xl leading-snug font-bold text-verd">{l.title}</h3>
           <p className="text-sm text-ink/70">
             {l.restaurantName}
-            {l.restaurantQuality ? <span className="ml-2 text-gold-dark">★ {t('card.quality', { score: l.restaurantQuality })}</span> : null}
+            {l.restaurantQuality ? <span className="ml-2 text-leaf-dark">★ {t('card.quality', { score: l.restaurantQuality })}</span> : null}
           </p>
         </div>
         {l.description && <p className="line-clamp-2 text-sm text-ink/80">{l.description}</p>}

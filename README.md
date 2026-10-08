@@ -65,7 +65,7 @@ It is an installable PWA in English, हिन्दी and ગુજરાત�
 - Web app manifest (name, short_name, theme/background colours, `standalone`, 192/512 icons plus maskable icons, shortcuts).
 - Service worker: precaches the app shell, uses network-first navigation with app-shell and **offline.html** fallbacks, cache-first static assets, and never caches the API.
 - A custom **Install app** button using `beforeinstallprompt`, plus **iOS "Add to Home Screen"** instructions.
-- Every icon is generated from the original shield crest (`web/public/logo.svg`) by `npm run icons`.
+- Every icon is generated from the Verd & Vine emblem (`web/public/logo.svg`: a serving bowl beneath a vine with leaves and grapes) by `npm run icons`.
 
 ## Architecture
 

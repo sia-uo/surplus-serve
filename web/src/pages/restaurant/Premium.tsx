@@ -39,7 +39,7 @@ function Bars({ rows, label }: { rows: { key: string; label: string; value: numb
           <li key={r.key} className="grid grid-cols-[5.5rem_1fr_3.5rem] items-center gap-2 text-sm">
             <span className="truncate text-ink/70">{r.label}</span>
             <span className="h-3 overflow-hidden rounded-full bg-ink/10">
-              <span className="block h-full rounded-full bg-gradient-to-r from-gold-dark to-gold" style={{ width: `${(r.value / max) * 100}%` }} />
+              <span className="block h-full rounded-full bg-gradient-to-r from-leaf-dark to-leaf" style={{ width: `${(r.value / max) * 100}%` }} />
             </span>
             <span className="text-right font-semibold text-verd tabular-nums">{fmtNumber(r.value, intl)}</span>
           </li>
@@ -72,11 +72,11 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
-  const gold = ctx.createLinearGradient(0, 0, W, H);
-  gold.addColorStop(0, '#F0D998');
-  gold.addColorStop(0.5, '#CFA64A');
-  gold.addColorStop(1, '#8A6A1E');
-  ctx.strokeStyle = gold;
+  const leaf = ctx.createLinearGradient(0, 0, W, H);
+  leaf.addColorStop(0, '#E4F1D4');
+  leaf.addColorStop(0.5, '#8FBF6C');
+  leaf.addColorStop(1, '#4E8A5C');
+  ctx.strokeStyle = leaf;
   ctx.lineWidth = 10;
   ctx.strokeRect(36, 36, W - 72, H - 72);
   ctx.lineWidth = 2;
@@ -90,7 +90,7 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
   }
 
   ctx.textAlign = 'center';
-  ctx.fillStyle = gold;
+  ctx.fillStyle = leaf;
   ctx.font = '700 64px "Playfair Display", Georgia, serif';
   ctx.fillText(labels.heading, W / 2, 330);
 
@@ -98,7 +98,7 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
   ctx.font = '400 28px "Inter Variable", system-ui, sans-serif';
   ctx.fillText(labels.presented, W / 2, 390);
 
-  ctx.fillStyle = gold;
+  ctx.fillStyle = leaf;
   ctx.font = '700 58px "Playfair Display", Georgia, serif';
   ctx.fillText(d.restaurantName, W / 2, 465, W - 240);
 
@@ -120,7 +120,7 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
     ctx.beginPath();
     ctx.roundRect(x - colW / 2 + 16, 580, colW - 32, 190, 22);
     ctx.fill();
-    ctx.strokeStyle = gold;
+    ctx.strokeStyle = leaf;
     ctx.lineWidth = 2;
     ctx.stroke();
     ctx.fillStyle = '#F8F4E8';
@@ -130,9 +130,9 @@ async function drawCertificate(canvas: HTMLCanvasElement, d: CertData, labels: R
     ctx.fillText(label, x, 730, colW - 50);
   });
 
-  ctx.fillStyle = gold;
+  ctx.fillStyle = leaf;
   ctx.font = '600 30px "Playfair Display", Georgia, serif';
-  ctx.fillText(`♛ ${labels.partner}`, W / 2, 850);
+  ctx.fillText(`🌿 ${labels.partner}`, W / 2, 850);
   ctx.fillStyle = 'rgba(248,244,232,0.7)';
   ctx.font = '400 20px "Inter Variable", system-ui, sans-serif';
   ctx.fillText(labels.footer, W / 2, 900, W - 240);
@@ -182,7 +182,7 @@ function Certificate() {
       </div>
       <div className="mt-4">
         {loading ? <Loading /> : error ? <ErrorState message={error} onRetry={reload} /> : null}
-        <canvas ref={canvasRef} className={`w-full rounded-xl border border-gold/50 ${loading || error ? 'hidden' : ''}`} aria-label={t('premium.certificate')} role="img" />
+        <canvas ref={canvasRef} className={`w-full rounded-xl border border-leaf/50 ${loading || error ? 'hidden' : ''}`} aria-label={t('premium.certificate')} role="img" />
         {data && data.meals === 0 && <p className="mt-2 text-sm text-ink/60">{t('premium.noData')}</p>}
       </div>
       {url && !loading && (
@@ -208,7 +208,7 @@ function AnalyticsPanel() {
   if (error || !data) return <ErrorState dark message={error} onRetry={reload} />;
   return (
     <section className="space-y-4">
-      <h2 className="text-2xl font-bold text-gold">{t('premium.analytics')}</h2>
+      <h2 className="text-2xl font-bold text-leaf">{t('premium.analytics')}</h2>
       <div className="grid grid-cols-2 gap-4">
         <StatCard dark icon="🎯" label={t('premium.rescueRate')} value={`${data.rescueRate}%`} />
         <StatCard dark icon="⚡" label={t('premium.avgClaim')} value={t('premium.minutes', { n: fmtNumber(data.avgMinutesToClaim, intl) })} />
@@ -297,12 +297,12 @@ export default function Premium() {
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="card-dark p-7">
             <p className="font-serif text-2xl font-bold">
-              <span className="gold-text">♛ {t('premium.badge')}</span>
+              <span className="leaf-text">🌿 {t('premium.badge')}</span>
             </p>
             <ul className="mt-5 space-y-3">
               {features.map((f) => (
                 <li key={f} className="flex gap-3 text-ivory/90">
-                  <span className="text-gold" aria-hidden>
+                  <span className="text-leaf" aria-hidden>
                     ✦
                   </span>
                   {t(f)}

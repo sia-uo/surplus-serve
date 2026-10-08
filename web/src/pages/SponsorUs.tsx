@@ -45,7 +45,7 @@ export default function SponsorUs() {
                 {icon}
               </span>
               <div>
-                <h2 className="font-serif text-lg font-bold text-gold">{t(title)}</h2>
+                <h2 className="font-serif text-lg font-bold text-leaf">{t(title)}</h2>
                 <p className="mt-1 text-sm text-ivory/80">{t(body)}</p>
               </div>
             </div>

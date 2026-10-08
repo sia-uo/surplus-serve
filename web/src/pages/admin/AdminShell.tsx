@@ -22,13 +22,13 @@ export default function AdminShell() {
   return (
     <Container>
       <p className="heading-eyebrow mb-3">{t('admin.title')}</p>
-      <nav className="-mx-1 mb-8 flex gap-1 overflow-x-auto border-b border-gold/25 px-1 pb-3" aria-label="Admin">
+      <nav className="-mx-1 mb-8 flex gap-1 overflow-x-auto border-b border-leaf/25 px-1 pb-3" aria-label="Admin">
         {LINKS.map((l) => (
           <NavLink
             key={l.to}
             to={l.to}
             end={l.end}
-            className={({ isActive }) => cx('chip shrink-0', isActive ? 'border-gold bg-gold text-verd' : 'border-gold/30 text-ivory hover:border-gold')}
+            className={({ isActive }) => cx('chip shrink-0', isActive ? 'border-leaf bg-leaf text-verd' : 'border-leaf/30 text-ivory hover:border-leaf')}
           >
             {t(l.key)}
           </NavLink>
@@ -42,7 +42,7 @@ export default function AdminShell() {
 export function AdminTitle({ children, actions }: { children: string; actions?: React.ReactNode }) {
   return (
     <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-      <h1 className="gold-text font-serif text-3xl font-bold">{children}</h1>
+      <h1 className="leaf-text font-serif text-3xl font-bold">{children}</h1>
       {actions}
     </div>
   );

@@ -1,0 +1,187 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource/playfair-display/latin-600.css';
+@import '@fontsource/playfair-display/latin-700.css';
+
+@theme {
+  --color-navy: #0b1f3a;
+  --color-navy-950: #06132a;
+  --color-navy-900: #08182f;
+  --color-navy-800: #102a4c;
+  --color-navy-700: #173863;
+  --color-crimson: #b3121f;
+  --color-crimson-700: #920e19;
+  --color-crimson-400: #d9404b;
+  --color-gold: #c9a227;
+  --color-gold-light: #e6cc72;
+  --color-gold-dark: #7d640f; /* readable gold for text on ivory (AA) */
+  --color-ivory: #f8f5ec;
+  --color-ivory-200: #efe8d6;
+  --color-ink: #1b2a41;
+
+  --font-sans: 'Inter Variable', 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Gujarati', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', 'Noto Serif', Georgia, serif;
+
+  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-pulse-soft: pulse-soft 2s ease-in-out infinite;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(179 18 31 / 0.55); }
+    50% { box-shadow: 0 0 0 6px rgb(179 18 31 / 0); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-navy font-sans text-ivory antialiased;
+    background-image:
+      radial-gradient(1200px 500px at 50% -200px, rgb(201 162 39 / 0.12), transparent 70%),
+      radial-gradient(800px 400px at 100% 0, rgb(179 18 31 / 0.1), transparent 70%);
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+  h1, h2, h3, .font-display {
+    @apply font-serif tracking-tight;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: rgb(201 162 39 / 0.35);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .gold-text {
+    background: linear-gradient(120deg, #f1dc8f 0%, #c9a227 45%, #e6cc72 60%, #a6851a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gold-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  }
+  .card {
+    @apply rounded-2xl border border-gold/40 bg-ivory text-ink shadow-[0_10px_30px_-12px_rgb(0_0_0/0.45)];
+  }
+  .card-dark {
+    @apply rounded-2xl border border-gold/30 bg-navy-800/70 text-ivory backdrop-blur;
+  }
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition duration-200 select-none disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98];
+  }
+  .btn-primary {
+    @apply bg-crimson text-white shadow-[0_6px_18px_-6px_rgb(179_18_31/0.7)] hover:bg-crimson-700;
+  }
+  .btn-gold {
+    @apply border border-gold bg-transparent text-gold hover:bg-gold hover:text-navy;
+  }
+  .btn-gold-solid {
+    @apply bg-gradient-to-r from-gold-light via-gold to-gold-dark text-navy hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply text-ink hover:bg-ink/5;
+  }
+  .btn-ghost-dark {
+    @apply text-ivory hover:bg-white/10;
+  }
+  .btn-outline {
+    @apply border border-ink/20 bg-white text-ink hover:border-gold-dark;
+  }
+  .input {
+    @apply block min-h-11 w-full rounded-xl border border-ink/20 bg-white px-3.5 py-2.5 text-[15px] text-ink placeholder:text-ink/40 transition focus:border-gold-dark focus:ring-2 focus:ring-gold/40 focus:outline-none disabled:bg-ivory-200;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-ink;
+  }
+  .hint {
+    @apply mt-1 text-xs text-ink/60;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap;
+  }
+  .chip {
+    @apply inline-flex min-h-9 cursor-pointer items-center rounded-full border px-3.5 text-sm font-medium transition;
+  }
+  .skeleton {
+    background: linear-gradient(90deg, rgb(27 42 65 / 0.06) 25%, rgb(27 42 65 / 0.12) 50%, rgb(27 42 65 / 0.06) 75%);
+    background-size: 200% 100%;
+    @apply animate-shimmer rounded-lg;
+  }
+  .heading-eyebrow {
+    @apply text-xs font-semibold tracking-[0.22em] text-gold uppercase;
+  }
+}
+
+/* Letter-spacing breaks Devanagari/Gujarati conjuncts — only track Latin text. */
+html:not([lang^='en']) .heading-eyebrow,
+html:not([lang^='en']) .tracking-widest {
+  letter-spacing: 0;
+}
+
+/* Leaflet tweaks for the theme */
+.leaflet-container {
+  font-family: var(--font-sans);
+  border-radius: 1rem;
+}
+.ss-marker {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--color-navy);
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.35);
+}
+.ss-marker span {
+  transform: rotate(45deg);
+  color: var(--color-gold);
+  font-size: 11px;
+  font-weight: 700;
+}
+.ss-marker.urgent {
+  background: var(--color-crimson);
+}
+.ss-marker.urgent span {
+  color: #fff;
+}
+.ss-marker.me {
+  background: var(--color-gold);
+  border-color: var(--color-navy);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+}
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
